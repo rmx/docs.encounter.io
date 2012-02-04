@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("texture.png");
+  font: 16px/1.4 "myriad-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #333;
+}
+
+html,
+body {
+  height: 100%;
+}
+#container {
+  width: 800px;
+  margin: 0 auto;
+}
+#content {
+  margin-left: 200px;
+}
+a {
+  color: #00b7ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+p {
+  margin: 10px 0;
+}
+h1 {
+  font-size: 26px;
+  font-weight: 300;
+  position: relative;
+}
+h1 a {
+  color: #222;
+  text-decoration: underline;
+}
+h1 time {
+  position: absolute;
+  bottom: -6px;
+  left: 6px;
+  font-size: 12px;
+}
+ul {
+  margin: 0 0 0 30px;
+  list-style-type: circle;
+}
+img {
+  max-width: 500px;
+}
+
+header {
+    position: relative;
+    font-weight: 300;
+    color: #222;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+header a {
+  color: #333;
+  text-decoration: none;
+}
+header a:hover {
+  text-decoration: underline;
+}
+header a.logo {
+  font-size: 28px;
+  font-weight: normal;
+  color: #111;
+}
+header a.logo > span {
+  font-size: 16px;
+}
+header a.logo > span:first-child {
+  font-size: 22px;
+}
+
+header #menu {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    list-style-type: none;
+    font-size: 16px;
+}
+
+footer {
+  display: block;
+  padding: 0 10px 20px;
+  margin: 20px auto 5px;
+  color: #777;
+  text-shadow: #fff 0 1px 1px;
+  overflow: hidden;
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+  font-weight: 200;
+}
+footer > * {
+  margin-top: 5px;
+}
+footer p {
+  float: left;
+  text-align: center;
+}
+footer ul {
+  float: right;
+}
+footer ul li {
+  float: left;
+  list-style: none;
+}
+footer ul li:first-child {
+  padding-right: 5px;
+}
+footer ul li span {
+  display: inline-block;
+  padding: 0 3px;
+}
+article {
+  margin-bottom: 30px;
+}
+article .content {
+  padding: 6px 10px;
+}
+
+#docs {
+    background: #F1F3F4;
+    border-radius: 5px;
+    border: 1px solid #CFCFCF;
+    box-shadow: 0 0 1px #CFCFCF inset;
+}
+
+#content {
+    min-height: 370px;
+    background: white;
+    padding: 30px 40px;
+    border-left: 1px solid #CFCFCF;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 1px #CFCFCF inset;
+}
+
+#sidebar {
+    width: 200px;
+    padding: 8px 0 8px 20px;
+    float: left;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#sidebar * {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+#sidebar h2 {
+    margin-top: 10px;
+}
+
+#content h1 {
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 30px;
+}
+
+#content h2 {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#content h3 {
+    font: 18px "ubuntu-mono", monospace;
+    margin-top: 30px;
+    background: transparent url(crud-sprite.png) left 3px no-repeat;
+    padding-left: 26px;
+}
+
+.minibutton {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    text-align: left;
+    text-decoration: none;
+    color: #666;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, whiteSmoke), color-stop(1, #F1F1F1));
+    background: -webkit-linear-gradient(top, whiteSmoke 0%, #F1F1F1 100%);
+    background: -moz-linear-gradient(top, whiteSmoke 0%, #F1F1F1 100%);
+    background: linear-gradient(top, whiteSmoke 0%, #F1F1F1 100%);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid rgba(110, 110, 110, 0.40);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    text-shadow: 1px 1px 0 white;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.minibutton:hover {
+    color: #000;
+    border-color: rgba(50,50,50,0.60);
+    -webkit-box-shadow: rgba(0,0,0,0.10) 0 1px 1px 0;
+    -moz-box-shadow: rgba(0,0,0,0.10) 0 1px 1px 0;
+    box-shadow: rgba(0,0,0,0.10) 0 1px 1px 0;
+    text-decoration: none;
+}
+
+.minibutton > span {
+    display: block;
+}
+
+.normal .minibutton {
+    height: 22px;
+    padding: 1px 7px 0;
+}
+
+.normal .minibutton > span {
+    font-weight: 300;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 7px;
+}
+
+pre {
+    border: 1px solid #CACACA;
+    line-height: 1.2em;
+    font: 14px "ubuntu-mono", monospace;
+    padding: 10px;
+    overflow: auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #FAFAFB;
+    color: #393939;
+    margin: 0px;
+}
+
+pre code {
+    white-space: nowrap;
+}
+
+p code {
+    font: 14px "ubuntu-mono", monospace;
+    color: #52595d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #CCC;
+    background-color: #F9F9F9;
+    padding: 0px 3px;
+    display: inline-block;
+}
