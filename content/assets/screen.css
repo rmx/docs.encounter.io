@@ -171,7 +171,8 @@ article .content {
 
 #content h2 {
     font-size: 20px;
-    font-weight: 300;
+    font-weight: normal;
+    margin-top: 40px;
 }
 
 #content h3 {
@@ -254,7 +255,7 @@ pre code {
     white-space: pre;
 }
 
-p code {
+p code, li code {
     font: 14px "ubuntu-mono", monospace;
     color: #52595d;
     -webkit-border-radius: 3px;
@@ -267,4 +268,8 @@ p code {
     background-color: #F9F9F9;
     padding: 0px 3px;
     display: inline-block;
+}
+
+.oh-1 {
+    margin-left: 20px;
 }
