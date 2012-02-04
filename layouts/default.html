@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>rmx docs - <%= @item[:title] %></title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<div id="container">
+<header>
+    <a href="/" class="logo"><span>docs.</span>rmx<span>.im</span></a>
+    <ul id="menu" class="normal">
+        <li><a href="http://rmx.im" class="minibutton"><span>rmx.im</span></a></li>
+    </ul>
+</header>
+
+<div id="docs">
+    <div id="sidebar">
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/intro/">Introduction</a></li>
+            <li><a href="/state-machine/">State Machine</a></li>
+        </ul>
+        <h2>Reference</h2>
+        <ul>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/scripts/">Scripts</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <%= yield %>
+    </div>
+</div>
+
+<footer>
+    <p>© rmx inc.</p>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+compile '/assets/*' do
+end
+
+compile '*' do
+    filter :erb
+    filter :kramdown
+    filter :colorize_syntax, :colorizers => { :javascript => :pygmentize }
+    layout 'default'
+end
+
+route '/assets/*' do
+    item.identifier.chop + '.' + item[:extension]
+end
+
+route '*' do
+    item.identifier + 'index.html'
+end
+
+layout '*', :erb

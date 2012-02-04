@@ -1,0 +1,18 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    cri (2.1.0)
+    kramdown (0.13.4)
+    nanoc (3.1.9)
+      nanoc3 (>= 3.1.9)
+    nanoc3 (3.2.4)
+      cri (~> 2.0)
+    pygmentize (0.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  kramdown (~> 0.13.2)
+  nanoc (~> 3.1.6)
+  pygmentize (~> 0.0.3)
