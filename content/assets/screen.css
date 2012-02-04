@@ -22,7 +22,7 @@ body {
   margin-left: 200px;
 }
 a {
-  color: #00b7ff;
+  color: #08C;
   text-decoration: none;
 }
 a:hover {
@@ -148,22 +148,25 @@ article .content {
     width: 200px;
     padding: 8px 0 8px 20px;
     float: left;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
+    margin-top: 10px;
 }
 
 #sidebar * {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
 }
 
 #sidebar h2 {
     margin-top: 10px;
+    font-weight: normal;
 }
 
 #content h1 {
     border-bottom: 1px solid #CCC;
     margin-bottom: 30px;
+    font-weight: normal;
 }
 
 #content h2 {
@@ -248,7 +251,7 @@ pre {
 }
 
 pre code {
-    white-space: nowrap;
+    white-space: pre;
 }
 
 p code {
