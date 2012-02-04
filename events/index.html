@@ -21,20 +21,24 @@
 
 <div id="docs">
     <div id="sidebar">
+        <a href="/">Introduction</a>
+
         <h2>Overview</h2>
         <ul>
-            <li><a href="/intro/">Introduction</a></li>
             <li><a href="/state-machine/">State Machine</a></li>
-        </ul>
-        <h2>Reference</h2>
-        <ul>
             <li><a href="/events/">Events</a></li>
             <li><a href="/scripts/">Scripts</a></li>
+        </ul>
+
+        <h2>Object Hierarchy</h2>
+        <ul>
+            <li><a href="/world-object/">WorldObject</a></li>
+            <li><a href="/unit/">Unit</a></li>
         </ul>
     </div>
 
     <div id="content">
-        <h1 id="events">events</h1>
+        <h1 id="events">Events</h1>
 
 <p>An event is a function name and arguments, which shall be called on a target
 object at a certain point in the future. The event also includes information
@@ -45,25 +49,6 @@ event to be generated.</p>
 wrappers that are available in a script context. This is to ensure that the
 fields such as <code>source</code> and <code>origin</code> are properly set. It also makes it easier
 because you don’t have to worry about those.</p>
-
-<h3 id="scheduleeventdelay-target-func-args">scheduleEvent(delay, target, func, args…)</h3>
-
-<p>Use this function to schedule an event after a certain delay. The delay is
-a positive number of miliseconds after which to apply the event. The function
-can be any of the publicly available functions on the target object.</p>
-
-<p>This example adds the <code>Renew</code> aura to the caster after three seconds:</p>
-
-<pre><code>scheduleEvent 3000, self, 'addAura', 'Renew'
-</code></pre>
-
-<p>Not all functions make sense to schedule in an event. As an example: While the
-system happily accepts an event which calls <code>getAttribute</code>, it will not
-actually have any effect on the game state, as the function merely queries the
-attribute.</p>
-
-<p>Calling an undefined function will cause a fatal error which immediately
-aborts the game.</p>
     </div>
 </div>
 
