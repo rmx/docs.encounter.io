@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>rmx docs - rmx docs - events</title>
+    <title>rmx docs - rmx docs - world object</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -38,17 +38,22 @@
     </div>
 
     <div id="content">
-        <h1 id="events">Events</h1>
+        <h1 id="worldobject">WorldObject</h1>
 
-<p>An event is a function name and arguments, which shall be called on a target
-object at a certain point in the future. The event also includes information
-about the origin and source objects. These are the objects which caused the
-event to be generated.</p>
+<p>The WorldObject is the base object in the hierarchy. It contains the most
+basic properties which are inherited by all other object types.</p>
 
-<p>You never directly create these events, but rather uses one of the many
-wrappers that are available in a script context. This is to ensure that the
-fields such as <code>source</code> and <code>origin</code> are properly set. It also makes it easier
-because you don’t have to worry about those.</p>
+<h2 id="position">Position</h2>
+
+<p>Each WorldObject has a position in the world. The position is a x/y/z tuple.</p>
+
+<h3 id="getposition--array">getPosition :: Array</h3>
+
+<p>The position is a three-element array, containing the x/y/z coordinates.</p>
+
+<h3 id="movetopositionx-y-z--undefined">moveToPosition(x, y, z) :: undefined</h3>
+
+<p>Moving an object dispatches an Event.</p>
     </div>
 </div>
 
