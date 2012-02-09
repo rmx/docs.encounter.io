@@ -64,9 +64,9 @@ Adds the items of one shuffle bag into another:
     @shuffleBag.addBag bag
 
 
-### next :: Item
+### next :: polymorphic
 
-Extracts the next item of the shuffle bag, e.g.,
+Extracts and returns the next item of the shuffle bag, e.g.,
 
     if @shuffleBag.next() is 'crit'
         hitCritical()
