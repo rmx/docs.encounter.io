@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>rmx docs - rmx docs - "fair" random number generator</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<div id="container">
+<header>
+    <a href="/" class="logo"><span>docs.</span>rmx<span>.im</span></a>
+    <ul id="menu" class="normal">
+        <li><a href="http://rmx.im" class="minibutton"><span>rmx.im</span></a></li>
+    </ul>
+</header>
+
+<div id="docs">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/scripts/">Scripts</a></li>
+            <li><a href="/prng/">PRNG</a></li>
+        </ul>
+
+        <h2>Object Hierarchy</h2>
+        <ul>
+            <li><a href="/world-object/">WorldObject</a></li>
+            <li class="oh-1"><a href="/unit/">Unit</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1 id="fair-random-number-generator">“Fair” Random Number Generator</h1>
+
+<p>As discussed in many game designer communities (e.g. <a href="http://seanmonstar.com/post/708989796/a-less-random-generator">Less-Random Generator</a>) a
+“fair” less-random generator is preferable to avoid frustrating players, e.g.,
+when having a 40% hit chance the player really expects to hit a creature twice
+out of five swings. This kind of controlled randomness can be implemented with
+a shuffle bag. A shuffle bag takes an arbitrary number of items, stuffs them
+into a bag and shuffles the items. When a random item is requested an item is
+drawn from the shuffle bag (and put aside). Once the bag is empty all items
+will be inserted (again) and the bag is shuffled (again).</p>
+
+<h2 id="pseudo-random-number-generator">Pseudo Random Number Generator</h2>
+
+<p>Designers can access an <a href="http://baagoe.com/en/RandomMusings/javascript/">Alea</a> PRNG by using the following symbols
+in the script environment.</p>
+
+<h3 id="random--number">random :: Number</h3>
+
+<p>Returns a random value between [0,1].</p>
+
+<h3 id="randombetweenmin-max--number">randomBetween(min, max) :: Number</h3>
+
+<p>Returns a random value between [min, max].</p>
+
+<h3 id="randomintbetweenmin-max--number">randomIntBetween(min, max) :: Number</h3>
+
+<p>Returns a random integer value between [min, max].</p>
+
+<h2 id="shuffle-bag">Shuffle Bag</h2>
+
+<p>Designers can use shuffle bags using the following symbols to get a freshly
+created shuffle bag and apply operations.</p>
+
+<h3 id="newshufflebag--shufflebag">newShuffleBag :: ShuffleBag</h3>
+
+<p>Returns a new (empty) shuffle bag.</p>
+
+<pre><code>@shuffleBag = $newShuffleBag()
+</code></pre>
+
+<h3 id="add-items-repetition--1--undefined">add (items, repetition = 1) :: undefined</h3>
+
+<p>Items can be added successively to a shuffle bag and an optional repetition
+frequency can be specified. After performing</p>
+
+<pre><code>@shuffleBag.add ['hit', 'crit']
+@shuffleBag.add ['hit', 'crit'], 2
+</code></pre>
+
+<p>on an empty shuffle bag, the bag contains three ‘hit’ and three ‘crit’ items.
+The number of items with the same value determines the longest streak
+(sequence) that can be drawn from the shuffle bag. Therefore, in the above
+example, the largest possible ‘hit’ or ‘crit’ streak has length 3.</p>
+
+<h3 id="addbag-bag--undefined">addBag (bag) :: undefined</h3>
+
+<p>Adds the items of one shuffle bag into another:</p>
+
+<pre><code>@shuffleBag.addBag bag
+</code></pre>
+
+<h3 id="next--polymorphic">next :: polymorphic</h3>
+
+<p>Extracts and returns the next item of the shuffle bag, e.g.,</p>
+
+<pre><code>if @shuffleBag.next() is 'crit'
+    hitCritical()
+</code></pre>
+
+<p>If no items have been added previously, next returns undefined.</p>
+    </div>
+</div>
+
+<footer>
+    <p>© rmx inc.</p>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</footer>
+</div>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+</body>
+</html>
