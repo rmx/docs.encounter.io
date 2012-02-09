@@ -4,7 +4,7 @@ title: rmx docs - "fair" random number generator
 
 # "Fair" Random Number Generator
 
-As discussed in many game designer communities (e.g. [Less-RandomGenerator]) a
+As discussed in many game designer communities (e.g. [Less-Random Generator]) a
 "fair" less-random generator is preferable to avoid frustrating players, e.g.,
 when having a 40% hit chance the player really expects to hit a creature twice
 out of five swings. This kind of controlled randomness can be implemented with
@@ -75,5 +75,5 @@ If no items have been added previously, next returns undefined.
 
 
 
-[Less-RandomGenerator]: http://seanmonstar.com/post/708989796/a-less-random-generator
+[Less-Random Generator]: http://seanmonstar.com/post/708989796/a-less-random-generator
 [Alea]: http://baagoe.com/en/RandomMusings/javascript/
