@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>rmx docs - rmx docs - terrain</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<div id="container">
+<header>
+    <a href="/" class="logo"><span>docs.</span>rmx<span>.im</span></a>
+    <ul id="menu" class="normal">
+        <li><a href="http://rmx.im" class="minibutton"><span>rmx.im</span></a></li>
+    </ul>
+</header>
+
+<div id="docs">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/scripts/">Scripts</a></li>
+            <li><a href="/prng/">PRNG</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+        </ul>
+
+        <h2>Object Hierarchy</h2>
+        <ul>
+            <li><a href="/world-object/">WorldObject</a></li>
+            <li class="oh-1"><a href="/unit/">Unit</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1 id="terrain">Terrain</h1>
+
+<p>The terrain class defines geometries of the worlds the players moves on. We
+have the following conventions for tiles and models:</p>
+
+<ul>
+<li>
+<code>+z</code> is up</li>
+  <li>
+<code>-x</code> is forward</li>
+</ul><p>A terrain is specified with two components. First we require one definition of a
+“tile” for every tile present in the terrain. Subsequently these tiles can be
+instantiated and positioned to represent worlds (best to use the in-browser
+editor). Both components are specified in JSON as shown in the corresponding
+sections.</p>
+
+<h2 id="tiles">Tiles</h2>
+
+<p>Tiles are squares defining the origin of the local coordinate system in the
+center of the tile. The tile has a <code>z</code> extension from <code>[-1, 1]</code> and the <code>z=0</code>
+layer is in the upper-left tile.</p>
+
+<p><img src="../assets/tile.png" alt="Tile specification"></p>
+
+<p>Tile IDs are unique names used for referencing by tile instances. The model name
+corresponds to a OBJ model to be found in the <code>world</code> directory of the
+encounter.</p>
+
+<pre><code>tiles:
+    tile_name:
+        model          : "model_name"
+        vertices       : [-1,-1,0, -1,1,0, 1,-1,0, 1,1,0]
+        facesProject   : [0,1,2, 1,3,2]
+        facesIntersect : []
+        bbox           : {pmin:[-1,-1,-1], pmax:[1,1,1]}
+</code></pre>
+
+<h3 id="creating-tiles-with-blender">Creating Tiles with Blender</h3>
+
+<p>TODO.</p>
+
+<h2 id="tile-instances">Tile Instances</h2>
+
+<p>Terrains are defined using the previously introduced tiles. Each tile instance
+has a unique identifier and references the tile name it represents. Position and
+rotation concertize the instance.</p>
+
+<pre><code>data:
+    0:
+        tile: "tile_name",
+        pos : [0,0,9],
+        rot : 0
+
+    1:
+        tile: "tile_name",
+        pos : [0,0,6],
+        rot : 0
+
+    2:
+        tile: "another_tile",
+        pos : [4,4,6],
+        rot : 0
+</code></pre>
+
+<p>All rotations are anticlock-wise and the rotation axis is the origin of the
+tile:</p>
+
+<ul>
+<li>0: no rotation</li>
+  <li>1: rotated by 90 degrees</li>
+  <li>2: rotated by 180 degrees</li>
+  <li>3: rotated by 270 degrees</li>
+</ul><h2 id="movement-and-terrain-positions">Movement and Terrain Positions</h2>
+
+<p>All <code>WorldObjects</code> are located at a <code>TerrainPosition</code>. Computing</p>
+
+<h3 id="getterrainpositiontile-localx-localy--terrainposition">getTerrainPosition(tile, local_x, local_y) :: TerrainPosition</h3>
+
+<p>Return the “global” terrain position corresponding to <code>(local_x, local_y)</code> in
+the specified tile.</p>
+
+<h3 id="movetowardsguid-velocity--10-mindistance--00--undefined">moveTowards(guid, velocity = 1.0, min_distance = 0.0) :: undefined</h3>
+
+<p>Convenient method for creatures to walk towards a player or position. TODO.</p>
+
+<h2 id="loading-a-terrain-and-spawn-locations">Loading a Terrain and Spawn Locations</h2>
+
+<p>In order to load terrain and define spawn location the encounter glue file has
+to implement the following two methods.</p>
+
+<h3 id="loadterraininstance--undefined">loadTerrain(instance) :: undefined</h3>
+
+<p>E.g., after</p>
+
+<pre><code>loadTerrain: (instance) -&gt;
+    instance.createTerrain "DrEvilsLair"
+</code></pre>
+
+<p>the terrain specified in ‘DrEvilsLair.coffee’ is loaded and upon bootstrapping
+sent to all players.</p>
+
+<h3 id="getspawnloactioninstance-player-role--undefined">getSpawnLoaction(instance, player, role) :: undefined</h3>
+
+<p>Method sets spawn location of player or role, e.g.,</p>
+
+<pre><code>getSpawnLocation: (instance, player, role) -&gt;
+    return instance.terrain.getTerrainPosition 0, 0.5, 0.5
+</code></pre>
+
+<p>meaning all players (regardless of role and player) will spawn in tile <code>0</code> at
+local coordinates <code>(0.5, 0.5)</code>.</p>
+    </div>
+</div>
+
+<footer>
+    <p>© rmx inc.</p>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</footer>
+</div>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+</body>
+</html>
