@@ -21,8 +21,8 @@ sections.
 ## Tiles
 
 Tiles are squares defining the origin of the local coordinate system in the
-center of the tile. The tile has a `z` extension from `[-1, 1]` and the `z=0`
-layer is in the upper-left tile.
+lower left front of the tile and has an extension to `[2, 2, 2]`. A tile has
+size `[0, 2N^3)`.
 
 ![Tile specification](../assets/tile.png)
 
