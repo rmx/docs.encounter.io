@@ -34,3 +34,25 @@ Teleport the object to the given position.
 ### distanceToObject(WorldObject) :: Number
 
 Return the euclidean distance between this and the other object.
+
+
+
+## Phase
+
+Each object exists in a certain phase. A phase is identified by a string. Only
+objects within the same phase can see each other. The default phase is `null`.
+
+
+### phase :: String
+
+This is the phase the object is currently in.
+
+
+### hasSamePhase(WorldObject) :: Boolean
+
+Returns true if this and the other object are in the same phase.
+
+
+### changePhase(String) :: undefined
+
+Move the object to the given phase.

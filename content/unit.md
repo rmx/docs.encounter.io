@@ -12,6 +12,19 @@ The WorldObject is the base object in the hierarchy. It contains the most
 basic properties which are inherited by all other object types.
 
 
+
+### isAlive :: Boolean
+
+True if the unit is alive, can move, cast and otherwise interact with the
+world.
+
+
+### declareDead :: undefined
+
+Declaring a unit dead will interrupt the current spellcast, remove all auras,
+make the unit immovable and inform all players that this unit died.
+
+
 ## Attributes
 
 Attributes are key/value pairs attached to a unit. There are a few basic
