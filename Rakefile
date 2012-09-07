@@ -14,7 +14,7 @@ task :publish => [ :clean ] do
   # this should not be necessary, but I can't figure out how to
   # just keep a goddamn static file in the root with nanoc
   File.open("public/CNAME", 'w+') do |f|
-    f.puts("docs.rmx.im")
+    f.puts("docs.encounter.io")
   end
 
   ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
