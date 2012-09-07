@@ -49,6 +49,16 @@ client in the canvas.</p>
 <p>The WorldObject is the base object in the hierarchy. It contains the most
 basic properties which are inherited by all other object types.</p>
 
+<h3 id="isalive--boolean">isAlive :: Boolean</h3>
+
+<p>True if the unit is alive, can move, cast and otherwise interact with the
+world.</p>
+
+<h3 id="declaredead--undefined">declareDead :: undefined</h3>
+
+<p>Declaring a unit dead will interrupt the current spellcast, remove all auras,
+make the unit immovable and inform all players that this unit died.</p>
+
 <h2 id="attributes">Attributes</h2>
 
 <p>Attributes are key/value pairs attached to a unit. There are a few basic

@@ -67,6 +67,23 @@ of the object.</p>
 <h3 id="distancetoobjectworldobject--number">distanceToObject(WorldObject) :: Number</h3>
 
 <p>Return the euclidean distance between this and the other object.</p>
+
+<h2 id="phase">Phase</h2>
+
+<p>Each object exists in a certain phase. A phase is identified by a string. Only
+objects within the same phase can see each other. The default phase is <code>null</code>.</p>
+
+<h3 id="phase--string">phase :: String</h3>
+
+<p>This is the phase the object is currently in.</p>
+
+<h3 id="hassamephaseworldobject--boolean">hasSamePhase(WorldObject) :: Boolean</h3>
+
+<p>Returns true if this and the other object are in the same phase.</p>
+
+<h3 id="changephasestring--undefined">changePhase(String) :: undefined</h3>
+
+<p>Move the object to the given phase.</p>
     </div>
 </div>
 
