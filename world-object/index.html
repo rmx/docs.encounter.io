@@ -47,15 +47,26 @@ basic properties which are inherited by all other object types.</p>
 
 <h2 id="position">Position</h2>
 
-<p>Each WorldObject has a position in the world. The position is a x/y/z tuple.</p>
+<p>Each WorldObject has a position in the world. You can query the position and
+move the object somewhere else.</p>
 
-<h3 id="getposition--array">getPosition :: Array</h3>
+<h3 id="getposition--position">getPosition :: Position</h3>
 
-<p>The position is a three-element array, containing the x/y/z coordinates.</p>
+<p>The position is represented by a special object. It stores the tile in which
+the object is, and the position within the tile.</p>
 
-<h3 id="movetopositionx-y-z--undefined">moveToPosition(x, y, z) :: undefined</h3>
+<h3 id="getworldposition--vector3">getWorldPosition :: Vector3</h3>
 
-<p>Moving an object dispatches an Event.</p>
+<p>The world position is a three-element array, containing the x/y/z coordinates
+of the object.</p>
+
+<h3 id="teleportposition--undefined">teleport(Position) :: undefined</h3>
+
+<p>Teleport the object to the given position.</p>
+
+<h3 id="distancetoobjectworldobject--number">distanceToObject(WorldObject) :: Number</h3>
+
+<p>Return the euclidean distance between this and the other object.</p>
     </div>
 </div>
 
