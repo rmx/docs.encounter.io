@@ -27,9 +27,14 @@
         <ul>
             <li><a href="/state-machine/">State Machine</a></li>
             <li><a href="/events/">Events</a></li>
-            <li><a href="/scripts/">Scripts</a></li>
             <li><a href="/prng/">PRNG</a></li>
             <li><a href="/terrain/">Terrain</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/">Overview</a></li>
+            <li><a href="/scripts/aura">Aura</a></li>
         </ul>
 
         <h2>Object Hierarchy</h2>
@@ -131,6 +136,15 @@ accessing and modifying the combat log events during each tick.</p>
 <h3 id="addauraname--undefined">addAura(name) :: undefined</h3>
 
 <h3 id="hasauraname--boolean">hasAura(name) :: Boolean</h3>
+
+<h3 id="triggerauraname--undefined">triggerAura(name) :: undefined</h3>
+
+<h3 id="removeauraname--undefined">removeAura(name) :: undefined</h3>
+
+<h3 id="clearauras--undefined">clearAuras :: undefined</h3>
+
+<p>Remove all auras from the unit. Is the same as calling <code>removeAura</code> for each
+aura that is currently on the unit.</p>
     </div>
 </div>
 
