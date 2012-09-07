@@ -10,14 +10,27 @@ basic properties which are inherited by all other object types.
 
 ## Position
 
-Each WorldObject has a position in the world. The position is a x/y/z tuple.
+Each WorldObject has a position in the world. You can query the position and
+move the object somewhere else.
 
 
-### getPosition :: Array
+### getPosition :: Position
 
-The position is a three-element array, containing the x/y/z coordinates.
+The position is represented by a special object. It stores the tile in which
+the object is, and the position within the tile.
 
 
-### moveToPosition(x, y, z) :: undefined
+### getWorldPosition :: Vector3
 
-Moving an object dispatches an Event.
+The world position is a three-element array, containing the x/y/z coordinates
+of the object.
+
+
+### teleport(Position) :: undefined
+
+Teleport the object to the given position.
+
+
+### distanceToObject(WorldObject) :: Number
+
+Return the euclidean distance between this and the other object.
