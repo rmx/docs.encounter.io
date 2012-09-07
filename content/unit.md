@@ -98,3 +98,12 @@ accessing and modifying the combat log events during each tick.
 ### addAura(name) :: undefined
 
 ### hasAura(name) :: Boolean
+
+### triggerAura(name) :: undefined
+
+### removeAura(name) :: undefined
+
+### clearAuras :: undefined
+
+Remove all auras from the unit. Is the same as calling `removeAura` for each
+aura that is currently on the unit.
