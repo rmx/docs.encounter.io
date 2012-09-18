@@ -1,5 +1,5 @@
 ---
-title: rmx docs - "fair" random number generator
+title: encounter docs - "fair" random number generator
 ---
 
 # "Fair" Random Number Generator

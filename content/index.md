@@ -1,5 +1,5 @@
 ---
-title: rmx docs - introduction
+title: encounter docs - introduction
 ---
 
 # Introduction

@@ -1,5 +1,5 @@
 ---
-title: rmx docs - world object
+title: encounter docs - world object
 ---
 
 # WorldObject

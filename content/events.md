@@ -1,5 +1,5 @@
 ---
-title: rmx docs - events
+title: encounter docs - events
 ---
 
 # Events

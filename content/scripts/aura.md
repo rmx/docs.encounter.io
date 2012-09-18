@@ -1,5 +1,5 @@
 ---
-title: rmx docs - scripts - aura
+title: encounter docs - scripts - aura
 ---
 
 # Aura

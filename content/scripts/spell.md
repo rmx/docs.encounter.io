@@ -1,5 +1,5 @@
 ---
-title: rmx docs - scripts - spell
+title: encounter docs - scripts - spell
 ---
 
 # Spell

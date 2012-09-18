@@ -1,6 +1,6 @@
-# docs.rmx.im
+# docs.encounter.io
 
-This is the documentation for `rmx.im`. It's built with [nanoc][nanoc].
+This is the documentation for `encounter.io`. It's built with [nanoc][nanoc].
 
 ## Instructions
 

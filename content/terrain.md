@@ -1,5 +1,5 @@
 ---
-title: rmx docs - terrain
+title: encounter docs - terrain
 ---
 
 # Terrain

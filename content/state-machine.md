@@ -1,5 +1,5 @@
 ---
-title: rmx docs - state machine
+title: encounter docs - state machine
 ---
 
 # State Machine

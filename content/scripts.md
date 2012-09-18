@@ -1,5 +1,5 @@
 ---
-title: rmx docs - scripts
+title: encounter docs - scripts
 ---
 
 # Scripts
