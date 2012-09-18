@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>rmx docs - rmx docs - scripts - aura</title>
+    <title>encounter docs - encounter docs - scripts - aura</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -13,9 +13,9 @@
 <body>
 <div id="container">
 <header>
-    <a href="/" class="logo"><span>docs.</span>rmx<span>.im</span></a>
+    <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
     <ul id="menu" class="normal">
-        <li><a href="http://rmx.im" class="minibutton"><span>rmx.im</span></a></li>
+        <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
     </ul>
 </header>
 
@@ -81,6 +81,35 @@ triggers itself, this can also be used to implement periodic actions.</p>
 <p>Called by the <code>removeAura</code> event.</p>
 
 <h3 id="hasfinished--boolean">hasFinished :: Boolean</h3>
+
+<h2 id="aura-options">Aura Options</h2>
+
+<p>An optional option dictionary can be passed to the <code>addAura</code> event to propagate
+information of auras across units.</p>
+
+<pre><code>options = { numberOfCharges: 10, stacks: 5, duration: 5 }
+target.addAura 'aura name', options
+</code></pre>
+
+<p>Some of the option names are reserved for displaying aura information in the
+UI:</p>
+
+<ul>
+<li>
+<code>stacks</code>: number of aura stacks</li>
+  <li>
+<code>duration</code>: remaining duration the aura is active</li>
+</ul><p>Note: The <code>duration</code> field will be used as a default duration of an aura and a
+<code>removeAura</code> event will be scheduled automatically on <code>start</code>.</p>
+
+<h2 id="convenience-functions">Convenience Functions</h2>
+
+<p>To facilitate aura handling we provide the following convenience functions:</p>
+
+<h3 id="changeauradurationtarget-name-deltat--undefined">changeAuraDuration(target, name, delta_t) :: undefined</h3>
+
+<p>Increases or decreases the aura (<code>name</code>) duration on <code>target</code> by <code>delta_t</code>.
+Pending <code>removeAura</code> events are altered when this function is invoked.</p>
     </div>
 </div>
 
