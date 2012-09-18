@@ -42,3 +42,34 @@ Called by the `removeAura` event.
 
 
 ### hasFinished :: Boolean
+
+
+
+## Aura Options
+
+An optional option dictionary can be passed to the `addAura` event to propagate
+information of auras across units.
+
+    options = { numberOfCharges: 10, stacks: 5, duration: 5 }
+    target.addAura 'aura name', options
+
+Some of the option names are reserved for displaying aura information in the
+UI:
+
+* `stacks`: number of aura stacks
+* `duration`: remaining duration the aura is active
+
+Note: The `duration` field will be used as a default duration of an aura and a
+`removeAura` event will be scheduled automatically on `start`.
+
+
+## Convenience Functions
+
+To facilitate aura handling we provide the following convenience functions:
+
+### changeAuraDuration(target, name, delta_t) :: undefined
+
+Increases or decreases the aura (`name`) duration on `target` by `delta_t`.
+Pending `removeAura` events are altered when this function is invoked.
+
+
