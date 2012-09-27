@@ -11,6 +11,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   kramdown (~> 0.13.2)
