@@ -7,6 +7,7 @@ GEM
     cri (2.3.0)
       colored (>= 1.2)
     kramdown (0.14.0)
+    mime-types (1.19)
     nanoc (3.4.1)
       cri (~> 2.2)
     nokogiri (1.5.5)
@@ -21,6 +22,7 @@ PLATFORMS
 DEPENDENCIES
   adsf
   kramdown
+  mime-types
   nanoc
   nokogiri
   pygmentize
