@@ -172,13 +172,13 @@ article .content {
 #content h2 {
     font-size: 20px;
     font-weight: normal;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 #content h3 {
-    font: 18px "ubuntu-mono", monospace;
-    margin-top: 30px;
-    background: transparent url(crud-sprite.png) left 3px no-repeat;
+    font: 16px "ubuntu-mono", monospace;
+    margin-top: 60px;
+    background: transparent url(crud-sprite.png) left 2px no-repeat;
     padding-left: 26px;
 }
 
