@@ -19,17 +19,23 @@ will be inserted (again) and the bag is shuffled (again).
 Designers can access an [Alea] PRNG by using the following symbols
 in the script environment.
 
-### random :: Number
+### random :: () -> Number
 
 Returns a random value between [0,1].
 
-### randomBetween(min, max) :: Number
+    x = random()
 
-Returns a random value between [min, max].
 
-### randomIntBetween(min, max) :: Number
+### randomBetween :: (Number, Number) -> Number
 
-Returns a random integer value between [min, max].
+Returns a random value between the two bounds.
+
+    x = randomBetween 5, 10
+
+
+### randomIntBetween :: (Number, Number) -> Number
+
+Same as `randomBetween`, but rounds to a Integer.
 
 
 ## Shuffle Bag
@@ -37,41 +43,36 @@ Returns a random integer value between [min, max].
 Designers can use shuffle bags using the following symbols to get a freshly
 created shuffle bag and apply operations.
 
-### newShuffleBag :: ShuffleBag
+### shuffleBagCreate :: () -> ShuffleBag
 
 Returns a new (empty) shuffle bag.
 
-    @shuffleBag = $newShuffleBag()
-
-### add (items, repetition = 1) :: undefined
-
-Items can be added successively to a shuffle bag and an optional repetition
-frequency can be specified. After performing
-
-    @shuffleBag.add ['hit', 'crit']
-    @shuffleBag.add ['hit', 'crit'], 2
-
-on an empty shuffle bag, the bag contains three 'hit' and three 'crit' items.
-The number of items with the same value determines the longest streak
-(sequence) that can be drawn from the shuffle bag. Therefore, in the above
-example, the largest possible 'hit' or 'crit' streak has length 3.
+    @shuffleBag = shuffleBagCreate()
 
 
-### addBag (bag) :: undefined
+### shuffleBagAdd :: (ShuffleBag, Any) -> undefined
 
-Adds the items of one shuffle bag into another:
+Items can be added successively to a shuffle bag. The following example would
+add three items to the shuffle bag.
 
-    @shuffleBag.addBag bag
+    shuffleBagAdd @shuffleBag, 'hit'
+    shuffleBagAdd @shuffleBag, 'hit'
+    shuffleBagAdd @shuffleBag, 'crit'
+
+The bag now contains two 'hit' and one 'crit' item. The number of items with
+the same value determines the longest streak (sequence) that can be drawn from
+the shuffle bag. Therefore, in the above example, the largest possible 'hit'
+streak is two, 'crit' streak is one.
 
 
-### next :: polymorphic
+### shuffleBagNext :: (ShuffleBag) -> Any
 
 Extracts and returns the next item of the shuffle bag, e.g.,
 
-    if @shuffleBag.next() is 'crit'
+    if shuffleBagNext(@shuffleBag) is 'crit'
         hitCritical()
 
-If no items have been added previously, next returns undefined.
+If no items have been added previously, it returns undefined.
 
 
 
