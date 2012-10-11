@@ -70,3 +70,24 @@ This example heals `self` when any event occurs within the game.
     filterEvent: (e) ->
         reaction = unitChangeAttributeBy self, 'health', +10
         eventAppend e, reaction
+
+
+
+## Parameters
+
+Parameters are values which you can access in your scripts. You use them to
+parametrize the effects of your spells or auras. For example, instead of
+hardcoding the damage or heal in your scripts, you'd use parameters. This
+allows you to fine-tune your encounter without having to create a new version
+of your spell or aura every time you need to adjust its effects.
+
+
+### paramGet :: (Function, String) -> Any
+
+Get a parameter by its name. The first argument is a function which will
+convert the string into any type you want. You can use the predefined
+functions `Number` or `String` to convert the parameter to a Number or String,
+respectively. If the conversion function returns undefined, the game will
+throw an exception.
+
+    damage = paramGet Number, 'BaseSpellDamage'
