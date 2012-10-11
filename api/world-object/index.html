@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>encounter docs - API - WorldObject</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<div id="container">
+<header>
+    <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
+    <ul id="menu" class="normal">
+        <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
+    </ul>
+</header>
+
+<div id="docs">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/terrain/">Terrain</a></li>
+            <li><a href="/api/world-object/">WorldObject</a></li>
+            <li><a href="/api/prng/">PRNG</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1 id="worldobject">WorldObject</h1>
+
+<p>A WorldObject is an object which is located at a certain position within
+a terrain. Each WorldObject has a (non-unique) name, and a model associated
+which is used to render the object on the client.</p>
+
+<h3 id="worldcreateunit--string-string-string-terrainposition---worldobject">worldCreateUnit :: (String, String, String, TerrainPosition) -&gt; WorldObject</h3>
+
+<p>Create a new <code>WorldObject</code>. The name does not need to be unique.</p>
+
+<pre><code>worldCreateUnit role, name, behavior, pos
+</code></pre>
+
+<h3 id="worlddeleteunit--worldobject---undefined">worldDeleteUnit :: (WorldObject) -&gt; undefined</h3>
+
+<p>Remove the given WorldObject from the game. This causes the object to be
+immediately disappear on the client.</p>
+
+<h2 id="position">Position</h2>
+
+<p>Each WorldObject has a position in the world. You can query the position and
+move the object somewhere else.</p>
+
+<h3 id="unitgetposition--worldobject---terrainposition">unitGetPosition :: (WorldObject) -&gt; TerrainPosition</h3>
+
+<p>Return the position at which the given object is located. The position is
+always valid.</p>
+
+<h3 id="unitteleportto--worldobject-terrainposition---event">unitTeleportTo :: (WorldObject, TerrainPosition) -&gt; Event</h3>
+
+<p>Teleport the WorldObject to a new position. The only constraints are that the
+new position must be valid. No speed, line in sight checks etc are performed.
+The new position may even be in a completely new terrain.</p>
+
+<h2 id="phase">Phase</h2>
+
+<p>Each object exists in a certain phase. A phase is identified by a string. Only
+objects within the same phase can see each other. The default phase is <code>null</code>.</p>
+
+<h2 id="attributes">Attributes</h2>
+
+<p>Attributes are key/value pairs attached to a WorldObject. There are a few
+basic attributes, and you can also create your own.</p>
+
+<ul>
+<li>
+<code>health</code>: When this attribute reaches zero then the WorldObject has died.
+This is displayed in the client UI as the health bar. The game engine will
+clamp this value between zero and <code>max-health</code>.</li>
+  <li>
+<code>max-health</code>: The maximum health that the unit can have.</li>
+</ul><h3 id="unitattributeget--worldobject-string---number">unitAttributeGet :: (WorldObject, String) -&gt; Number</h3>
+
+<p>Get the attribute. The example below sets the health to 50% of its current
+value.</p>
+
+<pre><code>currentHealth = unitAttributeGet self, 'health'
+event         = unitAttributeSet self, 'health', currentHealth * 0.5
+eventSchedule 0, event
+</code></pre>
+
+<h3 id="unitattributechangeby--worldobject-string-number---event">unitAttributeChangeBy :: (WorldObject, String, Number) -&gt; Event</h3>
+
+<p>Change the named attribute by the given delta. If the attribute does not
+exist, or is not a Number, then the game will throw an exception.</p>
+
+<pre><code>event = unitAttributeChangeBy self, 'health', +10
+eventSchedule 5, event
+</code></pre>
+
+<h3 id="unitattributeset--worldobject-string-number---event">unitAttributeSet :: (WorldObject, String, Number) -&gt; Event</h3>
+
+<p>Set an attribute. Currently we restrict the values to Numbers.</p>
+
+<h2 id="spells-and-cooldowns">Spells and Cooldowns</h2>
+
+<p>A WorldObject can cast only one spell at a time. Casting a spell may take some
+time, during that time the object may or may not move. Spells can be
+interrupted. Each spell is part of a cooldown group, all spells in that group
+share the same cooldown. Once a spell is successfully cast, no spell in the
+same cooldown group may be cast until the cooldown expires.</p>
+
+<h3 id="unitstartcast--worldobject-string-worldobject---event">unitStartCast :: (WorldObject, String, WorldObject) -&gt; Event</h3>
+
+<p>Start casting a spell on a target. The target is always a WorldObject.
+Currently it’s not possible to start casting a spell on an arbitrary position.</p>
+
+<h3 id="unitinterruptcast--worldobject---event">unitInterruptCast :: (WorldObject) -&gt; Event</h3>
+
+<p>Interrupt the spellcast. If the object is not casting any spell, the event has
+no effect.</p>
+
+<h3 id="unittriggercooldown--worldobject-string-number---event">unitTriggerCooldown :: (WorldObject, String, Number) -&gt; Event</h3>
+
+<p>Trigger a cooldown. A cooldown will prevent the object from casting spells in
+that cooldown category for the given amount of time. Many spells are in the
+<code>GLOBAL</code> cooldown category. This category usually has a short cooldown (1.5
+seconds) and is used to prevent the player from casting spells rapidly after
+each other.</p>
+
+<pre><code>event = unitTriggerCooldown self, 'GLOBAL', 1.5
+eventAppend e, event
+</code></pre>
+
+<h2 id="aura">Aura</h2>
+
+<p>Each WorldObject has a list of auras. The auras can strengthen or weaken the
+unit by accessing and modifying the combat log events during each tick.</p>
+
+<h3 id="unitauraadd--worldobject-string---event">unitAuraAdd :: (WorldObject, String) -&gt; Event</h3>
+
+<h3 id="unitauraremove--worldobject-string---event">unitAuraRemove :: (WorldObject, String) -&gt; Event</h3>
+
+<h3 id="unitauratrigger--worldobject-string---event">unitAuraTrigger :: (WorldObject, String) -&gt; Event</h3>
+
+<h3 id="unitauraispresent--worldobject-string---boolean">unitAuraIsPresent :: (WorldObject, String) -&gt; Boolean</h3>
+
+<p>Return true if the object has an aura active with the given name.</p>
+    </div>
+</div>
+
+<footer>
+    <p>© rmx inc.</p>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</footer>
+</div>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+</body>
+</html>

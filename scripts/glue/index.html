@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - encounter docs - terrain</title>
+    <title>encounter docs - Scripts - Glue</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -48,79 +48,24 @@
     </div>
 
     <div id="content">
-        <h1 id="terrain">Terrain</h1>
+        <h1 id="glue">Glue</h1>
 
-<p>The terrain class defines geometries of the worlds the players moves on. We
-have the following conventions for tiles and models:</p>
+<p>The Glue script is where you initialize the whole encounter. The class is
+instanciated just after the server has initialized the game. You should create
+all necessary terrains and world objects in the constructor.</p>
 
-<ul>
-<li>
-<code>+z</code> is up</li>
-  <li>
-<code>-x</code> is forward</li>
-</ul><p>A terrain is specified with two components. First we require one definition of a
-“tile” for every tile present in the terrain. Subsequently these tiles can be
-instantiated and positioned to represent worlds (best to use the in-browser
-editor). Both components are specified in JSON as shown in the corresponding
-sections.</p>
+<h3 id="getspawnlocationrole--terrainposition">getSpawnLocation(role) :: TerrainPosition</h3>
 
-<h2 id="tiles">Tiles</h2>
+<p>This function is called once for each player that is participating in the
+game. It must return the <code>TerrainPosition</code> at which the player should be
+put, e.g.,</p>
 
-<p>Tiles are squares defining the origin of the local coordinate system in the
-lower left front of the tile and has an extension to <code>[2, 2, 2]</code>. A tile has
-size <code>[0, 2N^3)</code>.</p>
-
-<p><img src="../assets/tile.png" alt="Tile specification"></p>
-
-<p>Tile IDs are unique names used for referencing by tile instances. The model name
-corresponds to a OBJ model to be found in the <code>world</code> directory of the
-encounter.</p>
-
-<pre><code>tiles:
-    tile_name:
-        model          : "model_name"
-        vertices       : [-1,-1,0, -1,1,0, 1,-1,0, 1,1,0]
-        facesProject   : [0,1,2, 1,3,2]
-        facesIntersect : []
-        bbox           : {pmin:[-1,-1,-1], pmax:[1,1,1]}
+<pre><code>getSpawnLocation: (role) -&gt;
+    return getTerrainPosition 'default', 0, 0.5, 0.5
 </code></pre>
 
-<h3 id="creating-tiles-with-blender">Creating Tiles with Blender</h3>
-
-<p>TODO.</p>
-
-<h2 id="tile-instances">Tile Instances</h2>
-
-<p>Terrains are defined using the previously introduced tiles. Each tile instance
-has a unique identifier and references the tile name it represents. Position and
-rotation concertize the instance.</p>
-
-<pre><code>data:
-    0:
-        tile: "tile_name",
-        pos : [0,0,9],
-        rot : 0
-
-    1:
-        tile: "tile_name",
-        pos : [0,0,6],
-        rot : 0
-
-    2:
-        tile: "another_tile",
-        pos : [4,4,6],
-        rot : 0
-</code></pre>
-
-<p>All rotations are anticlock-wise and the rotation axis is the origin of the
-tile:</p>
-
-<ul>
-<li>0: no rotation</li>
-  <li>1: rotated by 90 degrees</li>
-  <li>2: rotated by 180 degrees</li>
-  <li>3: rotated by 270 degrees</li>
-</ul>
+<p>meaning all players (regardless of role) will spawn in tile <code>0</code> at local
+coordinates <code>(0.5, 0.5)</code>.</p>
     </div>
 </div>
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - encounter docs - scripts</title>
+    <title>encounter docs - API</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -48,16 +48,24 @@
     </div>
 
     <div id="content">
-        <h1 id="scripts">Scripts</h1>
+        <h1 id="overview">Overview</h1>
 
-<p>Scripts are blocks of code which control the behavior and effects of units,
-spells, auras etc. Scripts are written in <a href="http://coffeescript.org/">Coffee-Script</a>, and
-run in a sandboxed context with only limited access to the game state.</p>
+<p>The scripts you write run in a sandboxed context and where they have access to
+the following symbols and functions.</p>
 
-<h2 id="script-context">Script Context</h2>
+<h3 id="currenttime--number">currentTime :: Number</h3>
 
-<p>The script context exposes accessors to the game state and useful helper
-functions. Here is a list of all symbols available in the script environment.</p>
+<p>The in-game time is represented by a number, counting the seconds since an
+arbitrary point in the past. For example, you can save the current time in the
+constructor and then calculate how long it has been when a certain events
+occurs.</p>
+
+<pre><code>constructor: -&gt;
+    @createdAt = currentTime
+
+filterEvent: (e) -&gt;
+    diff = currentTime - @createdAt
+</code></pre>
 
 <h3 id="self--worldobject">self :: WorldObject</h3>
 
@@ -65,33 +73,46 @@ functions. Here is a list of all symbols available in the script environment.</p
 the object which is casting the spell (spell scripts) or the object which has
 the aura (aura scripts).</p>
 
-<h3 id="scheduleeventdelay-target-func-args--undefined">scheduleEvent(delay, target, func, args…) :: undefined</h3>
+<h3 id="worldobjects--list">worldObjects :: List</h3>
 
-<p>Use this function to schedule an event after a certain delay. The delay is
-a positive number of miliseconds after which to apply the event. The function
-can be any of the publicly available functions on the target object.</p>
-
-<p>This example adds the <code>Renew</code> aura to the caster after three seconds:</p>
-
-<pre><code>scheduleEvent 3000, self, 'addAura', 'Renew'
-</code></pre>
-
-<p>Not all functions make sense to schedule in an event. As an example: While the
-system happily accepts an event which calls <code>getAttribute</code>, it will not
-actually have any effect on the game state, as the function merely queries the
-attribute.</p>
-
-<p>Calling an undefined function will cause a fatal error which immediately
-aborts the game.</p>
-
-<h3 id="worldobjects--array">worldObjects :: Array</h3>
-
-<p>The array of all objects in the world. You can use the <code>filter</code> function to
+<p>The list of all objects in the world. You can use the <code>listFilter</code> function to
 filter these objects to select only those that you want. The following example
 gets a list of objects within 5 meters of self:</p>
 
-<pre><code>targets = worldObjects.filter (obj) -&gt;
-    self.distanceToObject(obj) &lt; 5
+<pre><code>targets = listFilter worldObjects, (obj) -&gt;
+    distanceBetween(self, obj) &lt; 5
+</code></pre>
+
+<h2 id="events">Events</h2>
+
+<p>Scripts can not directly change the game state. They must use events to do so.
+This allows other scripts to react to these events. How to create events is
+described in later sections. Once you have an event you have to either
+schedule it to be executed at some point in the future, or append it to
+another event.</p>
+
+<h3 id="eventschedule--number-event---undefined">eventSchedule :: (Number, Event) -&gt; undefined</h3>
+
+<p>Use this function to schedule an event after a certain delay. The delay is
+a positive number of seconds after which to apply the event.</p>
+
+<p>This example adds the <code>Renew</code> aura to the caster after three seconds:</p>
+
+<pre><code>event = unitAddAura self, 'Renew'
+eventSchedule 3, event
+</code></pre>
+
+<h3 id="eventappend--event-event---undefined">eventAppend :: (Event, Event) -&gt; undefined</h3>
+
+<p>Append an event as a reaction to another event. The first argument is the
+event to which you want to append the reaction. You would usually use this in
+the <code>filterEvent</code> function to react to certain events.</p>
+
+<p>This example heals <code>self</code> when any event occurs within the game.</p>
+
+<pre><code>filterEvent: (e) -&gt;
+    reaction = unitChangeAttributeBy self, 'health', +10
+    eventAppend e, reaction
 </code></pre>
     </div>
 </div>

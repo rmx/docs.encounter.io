@@ -27,21 +27,23 @@
         <ul>
             <li><a href="/state-machine/">State Machine</a></li>
             <li><a href="/events/">Events</a></li>
-            <li><a href="/prng/">PRNG</a></li>
             <li><a href="/terrain/">Terrain</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/terrain/">Terrain</a></li>
+            <li><a href="/api/world-object/">WorldObject</a></li>
+            <li><a href="/api/prng/">PRNG</a></li>
         </ul>
 
         <h2>Scripts</h2>
         <ul>
-            <li><a href="/scripts/">Overview</a></li>
-            <li><a href="/scripts/aura">Aura</a></li>
-            <li><a href="/scripts/spell">Spell</a></li>
-        </ul>
-
-        <h2>Object Hierarchy</h2>
-        <ul>
-            <li><a href="/world-object/">WorldObject</a></li>
-            <li class="oh-1"><a href="/unit/">Unit</a></li>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
         </ul>
     </div>
 
@@ -62,60 +64,60 @@ will be inserted (again) and the bag is shuffled (again).</p>
 <p>Designers can access an <a href="http://baagoe.com/en/RandomMusings/javascript/">Alea</a> PRNG by using the following symbols
 in the script environment.</p>
 
-<h3 id="random--number">random :: Number</h3>
+<h3 id="random-----number">random :: () -&gt; Number</h3>
 
 <p>Returns a random value between [0,1].</p>
 
-<h3 id="randombetweenmin-max--number">randomBetween(min, max) :: Number</h3>
+<pre><code>x = random()
+</code></pre>
 
-<p>Returns a random value between [min, max].</p>
+<h3 id="randombetween--number-number---number">randomBetween :: (Number, Number) -&gt; Number</h3>
 
-<h3 id="randomintbetweenmin-max--number">randomIntBetween(min, max) :: Number</h3>
+<p>Returns a random value between the two bounds.</p>
 
-<p>Returns a random integer value between [min, max].</p>
+<pre><code>x = randomBetween 5, 10
+</code></pre>
+
+<h3 id="randomintbetween--number-number---number">randomIntBetween :: (Number, Number) -&gt; Number</h3>
+
+<p>Same as <code>randomBetween</code>, but rounds to a Integer.</p>
 
 <h2 id="shuffle-bag">Shuffle Bag</h2>
 
 <p>Designers can use shuffle bags using the following symbols to get a freshly
 created shuffle bag and apply operations.</p>
 
-<h3 id="newshufflebag--shufflebag">newShuffleBag :: ShuffleBag</h3>
+<h3 id="shufflebagcreate-----shufflebag">shuffleBagCreate :: () -&gt; ShuffleBag</h3>
 
 <p>Returns a new (empty) shuffle bag.</p>
 
-<pre><code>@shuffleBag = $newShuffleBag()
+<pre><code>@shuffleBag = shuffleBagCreate()
 </code></pre>
 
-<h3 id="add-items-repetition--1--undefined">add (items, repetition = 1) :: undefined</h3>
+<h3 id="shufflebagadd--shufflebag-any---undefined">shuffleBagAdd :: (ShuffleBag, Any) -&gt; undefined</h3>
 
-<p>Items can be added successively to a shuffle bag and an optional repetition
-frequency can be specified. After performing</p>
+<p>Items can be added successively to a shuffle bag. The following example would
+add three items to the shuffle bag.</p>
 
-<pre><code>@shuffleBag.add ['hit', 'crit']
-@shuffleBag.add ['hit', 'crit'], 2
+<pre><code>shuffleBagAdd @shuffleBag, 'hit'
+shuffleBagAdd @shuffleBag, 'hit'
+shuffleBagAdd @shuffleBag, 'crit'
 </code></pre>
 
-<p>on an empty shuffle bag, the bag contains three ‘hit’ and three ‘crit’ items.
-The number of items with the same value determines the longest streak
-(sequence) that can be drawn from the shuffle bag. Therefore, in the above
-example, the largest possible ‘hit’ or ‘crit’ streak has length 3.</p>
+<p>The bag now contains two ‘hit’ and one ‘crit’ item. The number of items with
+the same value determines the longest streak (sequence) that can be drawn from
+the shuffle bag. Therefore, in the above example, the largest possible ‘hit’
+streak is two, ‘crit’ streak is one.</p>
 
-<h3 id="addbag-bag--undefined">addBag (bag) :: undefined</h3>
-
-<p>Adds the items of one shuffle bag into another:</p>
-
-<pre><code>@shuffleBag.addBag bag
-</code></pre>
-
-<h3 id="next--polymorphic">next :: polymorphic</h3>
+<h3 id="shufflebagnext--shufflebag---any">shuffleBagNext :: (ShuffleBag) -&gt; Any</h3>
 
 <p>Extracts and returns the next item of the shuffle bag, e.g.,</p>
 
-<pre><code>if @shuffleBag.next() is 'crit'
+<pre><code>if shuffleBagNext(@shuffleBag) is 'crit'
     hitCritical()
 </code></pre>
 
-<p>If no items have been added previously, next returns undefined.</p>
+<p>If no items have been added previously, it returns undefined.</p>
     </div>
 </div>
 
