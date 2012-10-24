@@ -132,3 +132,19 @@ unit by accessing and modifying the combat log events during each tick.
 ### unitAuraIsPresent :: (WorldObject, String) -> Boolean
 
 Return true if the object has an aura active with the given name.
+
+
+## Movement generator
+
+### unitWalkTo :: (WorldObject, TerrainPosition) -> Boolean
+
+Uses the pathfinder to first compute a path from the units position to the
+specified end position and then starts walking. Returns true if a path could
+be computed. Consecutive calls to this method overwrite previous move
+commands.
+
+
+### unitMoveAlongPath :: (WorldObject, [ TerrainPosition ]) ->
+
+Moves a unit along a list of terrain positions (waypoints). Consecutive calls
+to this method overwrite previous move commands
