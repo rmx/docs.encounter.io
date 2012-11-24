@@ -77,6 +77,25 @@ This example heals `self` when any event occurs within the game.
         eventAppend e, reaction
 
 
+### eventName :: (Event) -> String
+
+Extract the event name. You find the event names [here](/events/misc/) and on
+other related pages.
+
+### eventArg :: (Event, Number) -> Any
+
+Get the event argument at the given index.
+
+
+### eventData :: (Event, String) -> Any
+
+Get the named event property from the event. Throws an exception if the
+property does not exist in the given event. You should check with `eventName`
+first to see if you're dealing with the correct event.
+
+    if (eventName e) == 'finishGame' && (eventData e, 'outcome') == 'victory'
+            # The game has finished and players have won.
+
 
 ## Parameters
 
