@@ -6,6 +6,7 @@
 
     <title>encounter docs - Events - Miscellaneous</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,25 +64,25 @@
     </div>
 
     <div id="content">
-        <h1 id="miscellaneous">Miscellaneous</h1>
+        <h1>Miscellaneous</h1>
 
-<h3 id="startgame---">startGame :: { }</h3>
+<h3>startGame :: { }</h3>
 
 <p>The players have started the game. For example by engaging the enemy. Calling
 <code>gameDidStart</code> will cause this event to be fired.</p>
 
-<h3 id="finshgame---outcome--string-">finshGame :: { outcome :: String }</h3>
+<h3>finshGame :: { outcome :: String }</h3>
 
 <p>The game has ended. The outcome property indicates whether the players have
 won (<code>victory</code>) or lost (<code>defeat</code>) the game. Calling <code>gameDidEnd</code> will cause
 this event to be fired.</p>
 
-<h3 id="moveto--worldobject-position">moveTo :: (WorldObject, Position)</h3>
+<h3>moveTo :: (WorldObject, Position)</h3>
 
 <p>A WorldObject has moved. The event includes the new position where the object
 is located now.</p>
 
-<h3 id="speak--worldobject-string">speak :: (WorldObject, String)</h3>
+<h3>speak :: (WorldObject, String)</h3>
 
 <p>A WorldObject has spoken. Chat does not count as speaking (though maybe it
 should).</p>

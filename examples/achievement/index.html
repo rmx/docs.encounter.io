@@ -6,6 +6,7 @@
 
     <title>encounter docs - Example - Achievement</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,39 +64,38 @@
     </div>
 
     <div id="content">
-        <h1 id="example-achievement">Example: Achievement</h1>
+        <h1>Example: Achievement</h1>
 
 <p>This achievement, <strong>Speed Run</strong>, is awarded to players which complete the
 encounter within a given time limit.</p>
 
-<pre><code># We store the time limit in a param, so we can easily tweak it.
-timeLimit = paramGet Number, 'speedRunLimit'
+<pre><code class="language-coffeescript"><span class="c1"># We store the time limit in a param, so we can easily tweak it.</span>
+<span class="nv">timeLimit = </span><span class="nx">paramGet</span> <span class="nb">Number</span><span class="p">,</span> <span class="s">'speedRunLimit'</span>
 
-# Helper which returns true if the event indicates that the game has
-# finished and players have won.
-isVictoryEvent = (e) -&gt;
-    (eventName e) == 'finishGame' &amp;&amp; (eventData e, 'outcome') == 'victory'
+<span class="c1"># Helper which returns true if the event indicates that the game has</span>
+<span class="c1"># finished and players have won.</span>
+<span class="nv">isVictoryEvent = </span><span class="nf">(e) -&gt;</span>
+    <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'finishGame'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">eventData</span> <span class="nx">e</span><span class="p">,</span> <span class="s">'outcome'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'victory'</span>
 
-class Achievement
+<span class="k">class</span> <span class="nx">Achievement</span>
 
-    constructor: -&gt;
-        @startedAt = null
-
-
-    handleEvent: (e) -&gt;
-
-        # Store the time when players start the game (engage the boss).
-        if (eventName e) == 'startGame'
-            @startedAt = currentTime
-
-        # If the players win the game within the limit, give them all this
-        # achievement.
-        else if (isVictoryEvent e) &amp;&amp; currentTime - @startedAt &lt; timeLimit
-            forEach players, (x) -&gt; awardAchievement x, self
+    <span class="nv">constructor: </span><span class="o">-&gt;</span>
+        <span class="vi">@startedAt = </span><span class="kc">null</span>
 
 
-module.exports = Achievement
-</code></pre>
+    <span class="nv">handleEvent: </span><span class="nf">(e) -&gt;</span>
+
+        <span class="c1"># Store the time when players start the game (engage the boss).</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'startGame'</span>
+            <span class="vi">@startedAt = </span><span class="nx">currentTime</span>
+
+        <span class="c1"># If the players win the game within the limit, give them all this</span>
+        <span class="c1"># achievement.</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isVictoryEvent</span> <span class="nx">e</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">@startedAt</span> <span class="o">&lt;</span> <span class="nx">timeLimit</span>
+            <span class="nx">forEach</span> <span class="nx">players</span><span class="p">,</span> <span class="nf">(x) -&gt;</span> <span class="nx">awardAchievement</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">self</span>
+
+
+<span class="nv">module.exports = </span><span class="nx">Achievement</span></code></pre>
     </div>
 </div>
 

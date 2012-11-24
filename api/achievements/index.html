@@ -6,6 +6,7 @@
 
     <title>encounter docs - API - Achievements</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,32 +64,32 @@
     </div>
 
     <div id="content">
-        <h1 id="api-achievements">API: Achievements</h1>
+        <h1>API: Achievements</h1>
 
 <p>Achievements are awards that a player receives for outstanding performance.
 They are unique per encounter, meaning that a player can collect the same
 achievement twice if he plays two different encounters which feature the same
 achievement.</p>
 
-<p>All collected achievements are displayed on the players’ publc profile page.
+<p>All collected achievements are displayed on the players' publc profile page.
 If the player has collected the same achievement in multiple encounters, we
 display something along this:</p>
 
 <p>Achievement <em>Speed Run</em>, awarded in 42 encounters.</p>
 
-<h2 id="types">Types</h2>
+<h2>Types</h2>
 
-<h3 id="achievement">Achievement</h3>
+<h3>Achievement</h3>
 
 <p>An Achievement can only be accessed as <code>self</code> in achievement scripts.</p>
 
-<h2 id="functions">Functions</h2>
+<h2>Functions</h2>
 
-<h3 id="awardachievement--player-achievement---undefined">awardAchievement :: (Player, Achievement) -&gt; undefined</h3>
+<h3>awardAchievement :: (Player, Achievement) -&gt; undefined</h3>
 
 <p>Award an achievement to a player.</p>
 
-<h3 id="controllingplayer--worldobject---maybe-player">controllingPlayer :: (WorldObject) -&gt; Maybe Player</h3>
+<h3>controllingPlayer :: (WorldObject) -&gt; Maybe Player</h3>
 
 <p>If the given WorldObject is controlled by a player, then return the player.
 Otherwise return null.</p>

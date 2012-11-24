@@ -6,6 +6,7 @@
 
     <title>encounter docs - Scripts - Glue</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,13 +64,13 @@
     </div>
 
     <div id="content">
-        <h1 id="glue">Glue</h1>
+        <h1>Glue</h1>
 
 <p>The Glue script is where you initialize the whole encounter. The class is
 instanciated just after the server has initialized the game. You should create
 all necessary terrains and world objects in the constructor.</p>
 
-<h3 id="getspawnlocationrole--terrainposition">getSpawnLocation(role) :: TerrainPosition</h3>
+<h3>getSpawnLocation(role) :: TerrainPosition</h3>
 
 <p>This function is called once for each player that is participating in the
 game. It must return the <code>TerrainPosition</code> at which the player should be

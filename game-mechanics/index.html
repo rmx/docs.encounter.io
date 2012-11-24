@@ -6,6 +6,7 @@
 
     <title>encounter docs - Game Mechanics</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -66,27 +67,28 @@
         <p>These are the builtin game mechanics that are valid for all games. Scripts can
 not influence these. Players and designers can rely on these properties.</p>
 
-<h2 id="players">Players</h2>
+<h2>Players</h2>
 
 <ul>
 <li>A game is played by one or more players.</li>
-  <li>Players are grouped into teams (currently only a single team is possible).</li>
-  <li>Each player controls exactly one WorldObject.</li>
-</ul><h2 id="primary-attribute">Primary attribute</h2>
+<li>Players are grouped into teams (currently only a single team is possible).</li>
+<li>Each player controls exactly one WorldObject.</li>
+</ul><h2>Primary attribute</h2>
 
 <ul>
 <li>The primary attribute of each WorldObject is <code>health</code>.</li>
-  <li>If the attribute is zero at the end of a tick, the object is declared dead.</li>
-  <li>This attribute is displayed in the client UI at all times.</li>
-</ul><h2 id="spellcasting">Spellcasting</h2>
+<li>If the attribute is zero at the end of a tick, the object is declared dead.</li>
+<li>This attribute is displayed in the client UI at all times.</li>
+</ul><h2>Spellcasting</h2>
 
 <ul>
 <li>A WorldObject can cast only one spell at any given time.</li>
-  <li>Any requests to start a spellcast are silently ignored if:
-    <ul>
+<li>Any requests to start a spellcast are silently ignored if:
+
+<ul>
 <li>The caster is dead.</li>
-      <li>The caster is already casting a spell.</li>
-    </ul>
+<li>The caster is already casting a spell.</li>
+</ul>
 </li>
 </ul>
     </div>

@@ -6,6 +6,7 @@
 
     <title>encounter docs - Events - Spell</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,31 +64,31 @@
     </div>
 
     <div id="content">
-        <h1 id="spell">Spell</h1>
+        <h1>Spell</h1>
 
-<h3 id="attemptspellcast--worldobject-spell-spelltarget">attemptSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
+<h3>attemptSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
 
 <p>Emitted when the world object is about to attempt to cast a spell. It is
 followed by either <code>failSpellcast</code> or <code>startSpellcast</code>.</p>
 
-<h3 id="failspellcast--worldobject-spell-spelltarget">failSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
+<h3>failSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
 
 <p>The caster attempted to cast a spell, but it failed because the preconditions
 were not met (target is out of range, cooldown has not cleared yet etc).</p>
 
-<h3 id="startspellcast--worldobject-spell-spelltarget">startSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
+<h3>startSpellcast :: (WorldObject, Spell, SpellTarget)</h3>
 
 <p>The caster has started casting a spell.</p>
 
-<h3 id="finishspellcast--worldobject">finishSpellcast :: (WorldObject)</h3>
+<h3>finishSpellcast :: (WorldObject)</h3>
 
 <p>The caster has finished casting its spell.</p>
 
-<h3 id="cancelspellcast--worldobject">cancelSpellcast :: (WorldObject)</h3>
+<h3>cancelSpellcast :: (WorldObject)</h3>
 
 <p>The caster has canceled the cast.</p>
 
-<h3 id="interruptspellcast--worldobject">interruptSpellcast :: (WorldObject)</h3>
+<h3>interruptSpellcast :: (WorldObject)</h3>
 
 <p>The caster was interrupted while casting his spell.</p>
     </div>

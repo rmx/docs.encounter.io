@@ -6,6 +6,7 @@
 
     <title>encounter docs - API - Objectives</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,17 +64,17 @@
     </div>
 
     <div id="content">
-        <h1 id="objectives">Objectives</h1>
+        <h1>Objectives</h1>
 
 <p>Objectives are hints that are displayed on the client, They show the player
-what he has to complete in order to win the game. They are optional, it’s
+what he has to complete in order to win the game. They are optional, it's
 perfectly ok to not show any objectives and let the player figure out himself
 what to do.</p>
 
 <p>Currently only WorldObjects can be objectives. If a WorldObject is marked as
 objective (the <em>boss</em> which has to be killed), its health bar is dislpayed in
 the objective list on the client (top right corner). This way the <em>boss</em> is
-always visible to all players, even if the player doesn’t have the boss in its
+always visible to all players, even if the player doesn't have the boss in its
 target (useful for <em>healer</em> roles, which usually have one of their team
 members targetted).</p>
 
@@ -85,15 +86,15 @@ yet been completed. Once the objective is completed, you can mark it as
 remove objectives, if you want to guide the players through multiple
 consecutive objectives.</p>
 
-<h3 id="createobjective--worldobject---undefined">createObjective :: (WorldObject) -&gt; undefined</h3>
+<h3>createObjective :: (WorldObject) -&gt; undefined</h3>
 
 <p>Create a new objective from the given WorldObject.</p>
 
-<h3 id="clearobjective--worldobject---undefined">clearObjective :: (WorldObject) -&gt; undefined</h3>
+<h3>clearObjective :: (WorldObject) -&gt; undefined</h3>
 
 <p>If the given WorldObject is an objective, mark it as cleared.</p>
 
-<h3 id="removeobjective--worldobject---undefined">removeObjective :: (WorldObject) -&gt; undefined</h3>
+<h3>removeObjective :: (WorldObject) -&gt; undefined</h3>
 
 <p>If the given WorldObject is an objective, remove it.</p>
     </div>

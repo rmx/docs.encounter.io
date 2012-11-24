@@ -6,6 +6,7 @@
 
     <title>encounter docs - API - Terrain</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,19 +64,19 @@
     </div>
 
     <div id="content">
-        <h1 id="terrain">Terrain</h1>
+        <h1>Terrain</h1>
 
-<h2 id="types">Types</h2>
+<h2>Types</h2>
 
-<h3 id="terrainposition">TerrainPosition</h3>
+<h3>TerrainPosition</h3>
 
 <p>Describes a position within a terrain. Each WorldObject has such a position.
 You can create new positions from a terrain and a position within the terrain
 (<code>terrainGetPositionAt</code>), or get from a WorldObject using <code>unitGetPosition</code>.</p>
 
-<h2 id="functions">Functions</h2>
+<h2>Functions</h2>
 
-<h3 id="terraincreate--string-string---undefined">terrainCreate :: (String, String) -&gt; undefined</h3>
+<h3>terrainCreate :: (String, String) -&gt; undefined</h3>
 
 <p>Create a new instance of a terrain. Each instance is identified by a unique
 tag. You can use this tag to refer to the instance. If your encounter has only
@@ -84,7 +85,7 @@ at least one terrain instance in the Glue constructor. Later during the game
 you can create additional instances if required.</p>
 
 <p>The tag must be unique. If your encounter uses multiple terrain instances,
-it’s up to you to make sure that the tags are unique. If you try to use a tag
+it's up to you to make sure that the tags are unique. If you try to use a tag
 which already exists, the game will throw an exception.</p>
 
 <pre><code>class Glue
@@ -92,7 +93,7 @@ which already exists, the game will throw an exception.</p>
         terrainCreate 'Maze', 'default'
 </code></pre>
 
-<h3 id="terraingetpositionat--string-number-number-number---terrainposition">terrainGetPositionAt :: (String, Number, Number, Number) -&gt; TerrainPosition</h3>
+<h3>terrainGetPositionAt :: (String, Number, Number, Number) -&gt; TerrainPosition</h3>
 
 <p>Create a <code>TerrainPosition</code> which represents the position at the x/y/z
 coordinates within the terrain instance identified by the tag. The <code>z</code>

@@ -6,6 +6,7 @@
 
     <title>encounter docs - encounter docs - scripts</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,24 +64,24 @@
     </div>
 
     <div id="content">
-        <h1 id="scripts">Scripts</h1>
+        <h1>Scripts</h1>
 
 <p>Scripts are blocks of code which control the behavior and effects of units,
 spells, auras etc. Scripts are written in <a href="http://coffeescript.org/">Coffee-Script</a>, and
 run in a sandboxed context with only limited access to the game state.</p>
 
-<h2 id="script-context">Script Context</h2>
+<h2>Script Context</h2>
 
 <p>The script context exposes accessors to the game state and useful helper
 functions. Here is a list of all symbols available in the script environment.</p>
 
-<h3 id="self--worldobject">self :: WorldObject</h3>
+<h3>self :: WorldObject</h3>
 
 <p>Self refers to the object which the script is controlling (behavior scripts),
 the object which is casting the spell (spell scripts) or the object which has
 the aura (aura scripts).</p>
 
-<h3 id="scheduleeventdelay-target-func-args--undefined">scheduleEvent(delay, target, func, args…) :: undefined</h3>
+<h3>scheduleEvent(delay, target, func, args...) :: undefined</h3>
 
 <p>Use this function to schedule an event after a certain delay. The delay is
 a positive number of miliseconds after which to apply the event. The function
@@ -99,7 +100,7 @@ attribute.</p>
 <p>Calling an undefined function will cause a fatal error which immediately
 aborts the game.</p>
 
-<h3 id="worldobjects--array">worldObjects :: Array</h3>
+<h3>worldObjects :: Array</h3>
 
 <p>The array of all objects in the world. You can use the <code>filter</code> function to
 filter these objects to select only those that you want. The following example

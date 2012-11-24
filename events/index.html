@@ -6,6 +6,7 @@
 
     <title>encounter docs - encounter docs - events</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,7 +64,7 @@
     </div>
 
     <div id="content">
-        <h1 id="events">Events</h1>
+        <h1>Events</h1>
 
 <p>An event is a function name and arguments, which shall be called on a target
 object at a certain point in the future. The event also includes information
@@ -73,9 +74,9 @@ event to be generated.</p>
 <p>You never directly create these events, but rather uses one of the many
 wrappers that are available in a script context. This is to ensure that the
 fields such as <code>source</code> and <code>origin</code> are properly set. It also makes it easier
-because you don’t have to worry about those.</p>
+because you don't have to worry about those.</p>
 
-<h2 id="event-handling">Event Handling</h2>
+<h2>Event Handling</h2>
 
 <p>All game state changes always start with a packet (e.g., <code>GAMETICK</code>,
 <code>TELEPORT</code> or <code>CAST</code>).</p>
@@ -105,19 +106,19 @@ in certain cases (e.g. a damage shield). More specifically an aura can</p>
 
 <ul>
 <li>modify the event arguments</li>
-  <li>post reaction events (directly inserted in Combat Log)</li>
+<li>post reaction events (directly inserted in Combat Log)</li>
 </ul><p>When a Combat Log Event is processed the following stages are executed:</p>
 
 <ul>
 <li>Event source and target unit can react.</li>
-  <li>Apply the event (and all reactions) to the game state.</li>
-  <li>Check if any units are dead.</li>
+<li>Apply the event (and all reactions) to the game state.</li>
+<li>Check if any units are dead.</li>
 </ul><p>In the case multiple auras are present, the following evaluation ordering is
 used to resolve conflicts:</p>
 
 <ul>
 <li>Auras on the source unit, sorted by priority</li>
-  <li>Auras on the target unit, sorted by priority</li>
+<li>Auras on the target unit, sorted by priority</li>
 </ul>
     </div>
 </div>

@@ -6,6 +6,7 @@
 
     <title>encounter docs - API</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,12 +64,12 @@
     </div>
 
     <div id="content">
-        <h1 id="overview">Overview</h1>
+        <h1>Overview</h1>
 
 <p>The scripts you write run in a sandboxed context and where they have access to
 the following symbols and functions.</p>
 
-<h3 id="currenttime--number">currentTime :: Number</h3>
+<h3>currentTime :: Number</h3>
 
 <p>The in-game time is represented by a number, counting the seconds since an
 arbitrary point in the past. For example, you can save the current time in the
@@ -82,13 +83,13 @@ filterEvent: (e) -&gt;
     diff = currentTime - @createdAt
 </code></pre>
 
-<h3 id="self--worldobject">self :: WorldObject</h3>
+<h3>self :: WorldObject</h3>
 
 <p>Self refers to the object which the script is controlling (behavior scripts),
 the object which is casting the spell (spell scripts) or the object which has
 the aura (aura scripts).</p>
 
-<h3 id="worldobjects---worldobject-">worldObjects :: [ WorldObject ]</h3>
+<h3>worldObjects :: [ WorldObject ]</h3>
 
 <p>The list of all objects in the world. You can use the <code>listFilter</code> function to
 filter these objects to select only those that you want. The following example
@@ -98,11 +99,11 @@ gets a list of objects within 5 meters of self:</p>
     distanceBetween(self, obj) &lt; 5
 </code></pre>
 
-<h3 id="players---player-">players :: [ Player ]</h3>
+<h3>players :: [ Player ]</h3>
 
 <p>All players which are participating in the game.</p>
 
-<h2 id="events">Events</h2>
+<h2>Events</h2>
 
 <p>Scripts can not directly change the game state. They must use events to do so.
 This allows other scripts to react to these events. How to create events is
@@ -110,7 +111,7 @@ described in later sections. Once you have an event you have to either
 schedule it to be executed at some point in the future, or append it to
 another event.</p>
 
-<h3 id="eventschedule--number-event---undefined">eventSchedule :: (Number, Event) -&gt; undefined</h3>
+<h3>eventSchedule :: (Number, Event) -&gt; undefined</h3>
 
 <p>Use this function to schedule an event after a certain delay. The delay is
 a positive number of seconds after which to apply the event.</p>
@@ -121,7 +122,7 @@ a positive number of seconds after which to apply the event.</p>
 eventSchedule 3, event
 </code></pre>
 
-<h3 id="eventappend--event-event---undefined">eventAppend :: (Event, Event) -&gt; undefined</h3>
+<h3>eventAppend :: (Event, Event) -&gt; undefined</h3>
 
 <p>Append an event as a reaction to another event. The first argument is the
 event to which you want to append the reaction. You would usually use this in
@@ -134,34 +135,34 @@ the <code>filterEvent</code> function to react to certain events.</p>
     eventAppend e, reaction
 </code></pre>
 
-<h3 id="eventname--event---string">eventName :: (Event) -&gt; String</h3>
+<h3>eventName :: (Event) -&gt; String</h3>
 
 <p>Extract the event name. You find the event names <a href="/events/misc/">here</a> and on
 other related pages.</p>
 
-<h3 id="eventarg--event-number---any">eventArg :: (Event, Number) -&gt; Any</h3>
+<h3>eventArg :: (Event, Number) -&gt; Any</h3>
 
 <p>Get the event argument at the given index.</p>
 
-<h3 id="eventdata--event-string---any">eventData :: (Event, String) -&gt; Any</h3>
+<h3>eventData :: (Event, String) -&gt; Any</h3>
 
 <p>Get the named event property from the event. Throws an exception if the
 property does not exist in the given event. You should check with <code>eventName</code>
-first to see if you’re dealing with the correct event.</p>
+first to see if you're dealing with the correct event.</p>
 
 <pre><code>if (eventName e) == 'finishGame' &amp;&amp; (eventData e, 'outcome') == 'victory'
         # The game has finished and players have won.
 </code></pre>
 
-<h2 id="parameters">Parameters</h2>
+<h2>Parameters</h2>
 
 <p>Parameters are values which you can access in your scripts. You use them to
 parametrize the effects of your spells or auras. For example, instead of
-hardcoding the damage or heal in your scripts, you’d use parameters. This
+hardcoding the damage or heal in your scripts, you'd use parameters. This
 allows you to fine-tune your encounter without having to create a new version
 of your spell or aura every time you need to adjust its effects.</p>
 
-<h3 id="paramget--function-string---any">paramGet :: (Function, String) -&gt; Any</h3>
+<h3>paramGet :: (Function, String) -&gt; Any</h3>
 
 <p>Get a parameter by its name. The first argument is a function which will
 convert the string into any type you want. You can use the predefined

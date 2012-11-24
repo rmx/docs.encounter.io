@@ -6,6 +6,7 @@
 
     <title>encounter docs - encounter docs - scripts - aura</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,7 +64,7 @@
     </div>
 
     <div id="content">
-        <h1 id="aura">Aura</h1>
+        <h1>Aura</h1>
 
 <p>Auras are attached to a WorldObject. They remain attached until they are
 removed. An aura can also be triggered, either by itself or by another script.
@@ -76,30 +77,30 @@ on the unit, it is up to your script what should happen.</p>
 <p>These are the functions which are used by the game engine. All functions are
 optional.</p>
 
-<h3 id="start--undefined">start :: undefined</h3>
+<h3>start :: undefined</h3>
 
 <p>Called just after the aura is first attached to a unit. This function is called
 exactly onece.</p>
 
-<h3 id="refresh--undefined">refresh :: undefined</h3>
+<h3>refresh :: undefined</h3>
 
 <p>When the aura is already attached to the unit, <code>addAura</code> calls this function.
 You can chose whether to reset the state, ignore the event, or to stack the
 aura (eg. multiple stacks increase the effect).</p>
 
-<h3 id="trigger--undefined">trigger :: undefined</h3>
+<h3>trigger :: undefined</h3>
 
 <p>The <code>triggerAura</code> event directly calls this function. The use-case here is to
 trigger your aura whenever it should do something. If your trigger function
 triggers itself, this can also be used to implement periodic actions.</p>
 
-<h3 id="remove--undefined">remove :: undefined</h3>
+<h3>remove :: undefined</h3>
 
 <p>Called by the <code>removeAura</code> event.</p>
 
-<h3 id="hasfinished--boolean">hasFinished :: Boolean</h3>
+<h3>hasFinished :: Boolean</h3>
 
-<h2 id="aura-options">Aura Options</h2>
+<h2>Aura Options</h2>
 
 <p>An optional option dictionary can be passed to the <code>addAura</code> event to propagate
 information of auras across units.</p>
@@ -114,16 +115,16 @@ UI:</p>
 <ul>
 <li>
 <code>stacks</code>: number of aura stacks</li>
-  <li>
+<li>
 <code>duration</code>: remaining duration the aura is active</li>
 </ul><p>Note: The <code>duration</code> field will be used as a default duration of an aura and a
 <code>removeAura</code> event will be scheduled automatically on <code>start</code>.</p>
 
-<h2 id="convenience-functions">Convenience Functions</h2>
+<h2>Convenience Functions</h2>
 
 <p>To facilitate aura handling we provide the following convenience functions:</p>
 
-<h3 id="changeauradurationtarget-name-deltat--undefined">changeAuraDuration(target, name, delta_t) :: undefined</h3>
+<h3>changeAuraDuration(target, name, delta_t) :: undefined</h3>
 
 <p>Increases or decreases the aura (<code>name</code>) duration on <code>target</code> by <code>delta_t</code>.
 Pending <code>removeAura</code> events are altered when this function is invoked.</p>

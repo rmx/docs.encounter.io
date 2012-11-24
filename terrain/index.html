@@ -6,6 +6,7 @@
 
     <title>encounter docs - encounter docs - terrain</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -63,7 +64,7 @@
     </div>
 
     <div id="content">
-        <h1 id="terrain">Terrain</h1>
+        <h1>Terrain</h1>
 
 <p>The terrain class defines geometries of the worlds the players moves on. We
 have the following conventions for tiles and models:</p>
@@ -71,15 +72,15 @@ have the following conventions for tiles and models:</p>
 <ul>
 <li>
 <code>+z</code> is up</li>
-  <li>
+<li>
 <code>-x</code> is forward</li>
 </ul><p>A terrain is specified with two components. First we require one definition of a
-“tile” for every tile present in the terrain. Subsequently these tiles can be
+"tile" for every tile present in the terrain. Subsequently these tiles can be
 instantiated and positioned to represent worlds (best to use the in-browser
 editor). Both components are specified in JSON as shown in the corresponding
 sections.</p>
 
-<h2 id="tiles">Tiles</h2>
+<h2>Tiles</h2>
 
 <p>Tiles are squares defining the origin of the local coordinate system in the
 lower left front of the tile and has an extension to <code>[2, 2, 2]</code>. A tile has
@@ -100,11 +101,11 @@ encounter.</p>
         bbox           : {pmin:[-1,-1,-1], pmax:[1,1,1]}
 </code></pre>
 
-<h3 id="creating-tiles-with-blender">Creating Tiles with Blender</h3>
+<h3>Creating Tiles with Blender</h3>
 
 <p>TODO.</p>
 
-<h2 id="tile-instances">Tile Instances</h2>
+<h2>Tile Instances</h2>
 
 <p>Terrains are defined using the previously introduced tiles. Each tile instance
 has a unique identifier and references the tile name it represents. Position and
@@ -132,9 +133,9 @@ tile:</p>
 
 <ul>
 <li>0: no rotation</li>
-  <li>1: rotated by 90 degrees</li>
-  <li>2: rotated by 180 degrees</li>
-  <li>3: rotated by 270 degrees</li>
+<li>1: rotated by 90 degrees</li>
+<li>2: rotated by 180 degrees</li>
+<li>3: rotated by 270 degrees</li>
 </ul>
     </div>
 </div>
