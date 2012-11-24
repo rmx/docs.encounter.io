@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - encounter docs - introduction</title>
+    <title>encounter docs - Example - Achievement</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -63,19 +63,39 @@
     </div>
 
     <div id="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id="example-achievement">Example: Achievement</h1>
 
-<p>Designers can specify many aspects of the encounter, including:</p>
+<p>This achievement, <strong>Speed Run</strong>, is awarded to players which complete the
+encounter within a given time limit.</p>
 
-<ul>
-<li>Units the players can choose and they fight against.</li>
-  <li>Spells and auras which are available.</li>
-  <li>Behavior of enemies.</li>
-  <li>Models and appearance of the units and world.</li>
-  <li>Achievements the players can collect.</li>
-</ul><p>The website includes an online encounter editor which you can use to edit the
-files that make up the encounter, and test the encounter before releasing it
-to the public.</p>
+<pre><code># We store the time limit in a param, so we can easily tweak it.
+timeLimit = paramGet Number, 'speedRunLimit'
+
+# Helper which returns true if the event indicates that the game has
+# finished and players have won.
+isVictoryEvent = (e) -&gt;
+    (eventName e) == 'finishGame' &amp;&amp; (eventData e, 'outcome') == 'victory'
+
+class Achievement
+
+    constructor: -&gt;
+        @startedAt = null
+
+
+    handleEvent: (e) -&gt;
+
+        # Store the time when players start the game (engage the boss).
+        if (eventName e) == 'startGame'
+            @startedAt = currentTime
+
+        # If the players win the game within the limit, give them all this
+        # achievement.
+        else if (isVictoryEvent e) &amp;&amp; currentTime - @startedAt &lt; timeLimit
+            forEach players, (x) -&gt; awardAchievement x, self
+
+
+module.exports = Achievement
+</code></pre>
     </div>
 </div>
 
