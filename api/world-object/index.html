@@ -34,6 +34,7 @@
         <h2>Events</h2>
         <ul>
             <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/events/misc/">Miscellaneous</a></li>
         </ul>
 
         <h2>API</h2>
@@ -62,6 +63,15 @@
 <p>A WorldObject is an object which is located at a certain position within
 a terrain. Each WorldObject has a (non-unique) name, and a model associated
 which is used to render the object on the client.</p>
+
+<h2 id="types">Types</h2>
+
+<h3 id="worldobject-1">WorldObject</h3>
+
+<p>You can create new world objects using <code>worldCreateUnit</code>, and can list all
+world objects using <code>worldGetUnits</code>.</p>
+
+<h2 id="functions">Functions</h2>
 
 <h3 id="worldcreateunit--string-string-string-terrainposition---worldobject">worldCreateUnit :: (String, String, String, TerrainPosition) -&gt; WorldObject</h3>
 

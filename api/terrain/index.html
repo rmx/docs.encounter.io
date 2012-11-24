@@ -34,6 +34,7 @@
         <h2>Events</h2>
         <ul>
             <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/events/misc/">Miscellaneous</a></li>
         </ul>
 
         <h2>API</h2>
@@ -57,7 +58,19 @@
     </div>
 
     <div id="content">
-        <h3 id="terraincreate--string-string---undefined">terrainCreate :: (String, String) -&gt; undefined</h3>
+        <h1 id="terrain">Terrain</h1>
+
+<h2 id="types">Types</h2>
+
+<h3 id="terrainposition">TerrainPosition</h3>
+
+<p>Describes a position within a terrain. Each WorldObject has such a position.
+You can create new positions from a terrain and a position within the terrain
+(<code>terrainGetPositionAt</code>), or get from a WorldObject using <code>unitGetPosition</code>.</p>
+
+<h2 id="functions">Functions</h2>
+
+<h3 id="terraincreate--string-string---undefined">terrainCreate :: (String, String) -&gt; undefined</h3>
 
 <p>Create a new instance of a terrain. Each instance is identified by a unique
 tag. You can use this tag to refer to the instance. If your encounter has only
