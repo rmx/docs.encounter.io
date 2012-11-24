@@ -173,6 +173,8 @@ article .content {
     font-size: 20px;
     font-weight: normal;
     margin-top: 60px;
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 10px;
 }
 
 #content h3 {

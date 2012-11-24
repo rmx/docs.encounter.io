@@ -16,6 +16,15 @@ display something along this:
 Achievement _Speed Run_, awarded in 42 encounters.
 
 
+## Types
+
+### Achievement
+
+An Achievement can only be accessed as `self` in achievement scripts.
+
+
+## Functions
+
 ### awardAchievement :: (Player, Achievement) -> undefined
 
 Award an achievement to a player.

@@ -2,6 +2,20 @@
 title: API - Terrain
 ---
 
+# Terrain
+
+## Types
+
+### TerrainPosition
+
+Describes a position within a terrain. Each WorldObject has such a position.
+You can create new positions from a terrain and a position within the terrain
+(`terrainGetPositionAt`), or get from a WorldObject using `unitGetPosition`.
+
+
+## Functions
+
+
 ### terrainCreate :: (String, String) -> undefined
 
 Create a new instance of a terrain. Each instance is identified by a unique

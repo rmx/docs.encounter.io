@@ -9,6 +9,16 @@ a terrain. Each WorldObject has a (non-unique) name, and a model associated
 which is used to render the object on the client.
 
 
+## Types
+
+### WorldObject
+
+You can create new world objects using `worldCreateUnit`, and can list all
+world objects using `worldGetUnits`.
+
+
+## Functions
+
 ### worldCreateUnit :: (String, String, String, TerrainPosition) -> WorldObject
 
 Create a new `WorldObject`. The name does not need to be unique.
