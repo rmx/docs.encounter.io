@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - Scripts - Glue</title>
+    <title>encounter docs - API - Achievements</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -57,24 +57,27 @@
     </div>
 
     <div id="content">
-        <h1 id="glue">Glue</h1>
+        <h1 id="api-achievements">API: Achievements</h1>
 
-<p>The Glue script is where you initialize the whole encounter. The class is
-instanciated just after the server has initialized the game. You should create
-all necessary terrains and world objects in the constructor.</p>
+<p>Achievements are awards that a player receives for outstanding performance.
+They are unique per encounter, meaning that a player can collect the same
+achievement twice if he plays two different encounters which feature the same
+achievement.</p>
 
-<h3 id="getspawnlocationrole--terrainposition">getSpawnLocation(role) :: TerrainPosition</h3>
+<p>All collected achievements are displayed on the players’ publc profile page.
+If the player has collected the same achievement in multiple encounters, we
+display something along this:</p>
 
-<p>This function is called once for each player that is participating in the
-game. It must return the <code>TerrainPosition</code> at which the player should be
-put, e.g.,</p>
+<p>Achievement <em>Speed Run</em>, awarded in 42 encounters.</p>
 
-<pre><code>getSpawnLocation: (role) -&gt;
-    return getTerrainPosition 'default', 0, 0.5, 0.5
-</code></pre>
+<h3 id="awardachievement--player-achievement---undefined">awardAchievement :: (Player, Achievement) -&gt; undefined</h3>
 
-<p>meaning all players (regardless of role) will spawn in tile <code>0</code> at local
-coordinates <code>(0.5, 0.5)</code>.</p>
+<p>Award an achievement to a player.</p>
+
+<h3 id="controllingplayer--worldobject---maybe-player">controllingPlayer :: (WorldObject) -&gt; Maybe Player</h3>
+
+<p>If the given WorldObject is controlled by a player, then return the player.
+Otherwise return null.</p>
     </div>
 </div>
 

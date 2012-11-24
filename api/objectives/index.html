@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - Scripts - Glue</title>
+    <title>encounter docs - API - Objectives</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
 
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
@@ -57,24 +57,39 @@
     </div>
 
     <div id="content">
-        <h1 id="glue">Glue</h1>
+        <h1 id="objectives">Objectives</h1>
 
-<p>The Glue script is where you initialize the whole encounter. The class is
-instanciated just after the server has initialized the game. You should create
-all necessary terrains and world objects in the constructor.</p>
+<p>Objectives are hints that are displayed on the client, They show the player
+what he has to complete in order to win the game. They are optional, it’s
+perfectly ok to not show any objectives and let the player figure out himself
+what to do.</p>
 
-<h3 id="getspawnlocationrole--terrainposition">getSpawnLocation(role) :: TerrainPosition</h3>
+<p>Currently only WorldObjects can be objectives. If a WorldObject is marked as
+objective (the <em>boss</em> which has to be killed), its health bar is dislpayed in
+the objective list on the client (top right corner). This way the <em>boss</em> is
+always visible to all players, even if the player doesn’t have the boss in its
+target (useful for <em>healer</em> roles, which usually have one of their team
+members targetted).</p>
 
-<p>This function is called once for each player that is participating in the
-game. It must return the <code>TerrainPosition</code> at which the player should be
-put, e.g.,</p>
+<p>Newly created objectives are marked as <em>not cleared</em>. Meaning they have not
+yet been completed. Once the objective is completed, you can mark it as
+<em>cleared</em>. The client will display cleared objectives with a green-ish color.</p>
 
-<pre><code>getSpawnLocation: (role) -&gt;
-    return getTerrainPosition 'default', 0, 0.5, 0.5
-</code></pre>
+<p>Once an objective is cleared, it can not be un-cleared again. But you can
+remove objectives, if you want to guide the players through multiple
+consecutive objectives.</p>
 
-<p>meaning all players (regardless of role) will spawn in tile <code>0</code> at local
-coordinates <code>(0.5, 0.5)</code>.</p>
+<h3 id="createobjective--worldobject---undefined">createObjective :: (WorldObject) -&gt; undefined</h3>
+
+<p>Create a new objective from the given WorldObject.</p>
+
+<h3 id="clearobjective--worldobject---undefined">clearObjective :: (WorldObject) -&gt; undefined</h3>
+
+<p>If the given WorldObject is an objective, mark it as cleared.</p>
+
+<h3 id="removeobjective--worldobject---undefined">removeObjective :: (WorldObject) -&gt; undefined</h3>
+
+<p>If the given WorldObject is an objective, remove it.</p>
     </div>
 </div>
 

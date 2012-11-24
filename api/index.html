@@ -42,10 +42,13 @@
             <li><a href="/api/terrain/">Terrain</a></li>
             <li><a href="/api/world-object/">WorldObject</a></li>
             <li><a href="/api/prng/">PRNG</a></li>
+            <li><a href="/api/objectives/">Objectives</a></li>
+            <li><a href="/api/achievements/">Achievements</a></li>
         </ul>
 
         <h2>Scripts</h2>
         <ul>
+            <li><a href="/scripts/achievement/">Achievement</a></li>
             <li><a href="/scripts/aura/">Aura</a></li>
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
@@ -79,7 +82,7 @@ filterEvent: (e) -&gt;
 the object which is casting the spell (spell scripts) or the object which has
 the aura (aura scripts).</p>
 
-<h3 id="worldobjects--list">worldObjects :: List</h3>
+<h3 id="worldobjects---worldobject-">worldObjects :: [ WorldObject ]</h3>
 
 <p>The list of all objects in the world. You can use the <code>listFilter</code> function to
 filter these objects to select only those that you want. The following example
@@ -88,6 +91,10 @@ gets a list of objects within 5 meters of self:</p>
 <pre><code>targets = listFilter worldObjects, (obj) -&gt;
     distanceBetween(self, obj) &lt; 5
 </code></pre>
+
+<h3 id="players---player-">players :: [ Player ]</h3>
+
+<p>All players which are participating in the game.</p>
 
 <h2 id="events">Events</h2>
 
