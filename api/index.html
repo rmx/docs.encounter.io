@@ -129,6 +129,25 @@ the <code>filterEvent</code> function to react to certain events.</p>
     eventAppend e, reaction
 </code></pre>
 
+<h3 id="eventname--event---string">eventName :: (Event) -&gt; String</h3>
+
+<p>Extract the event name. You find the event names <a href="/events/misc/">here</a> and on
+other related pages.</p>
+
+<h3 id="eventarg--event-number---any">eventArg :: (Event, Number) -&gt; Any</h3>
+
+<p>Get the event argument at the given index.</p>
+
+<h3 id="eventdata--event-string---any">eventData :: (Event, String) -&gt; Any</h3>
+
+<p>Get the named event property from the event. Throws an exception if the
+property does not exist in the given event. You should check with <code>eventName</code>
+first to see if you’re dealing with the correct event.</p>
+
+<pre><code>if (eventName e) == 'finishGame' &amp;&amp; (eventData e, 'outcome') == 'victory'
+        # The game has finished and players have won.
+</code></pre>
+
 <h2 id="parameters">Parameters</h2>
 
 <p>Parameters are values which you can access in your scripts. You use them to
