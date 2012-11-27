@@ -38,3 +38,35 @@ task :publish => [ :clean ] do
     `git push origin gh-pages`
   end
 end
+
+task :ref, :name do |t, args|
+  name = ARGV.first.gsub(/^ref\[(.*)\]$/, '\1').split(' :: ')
+  File.open('./content/api/ref/' + name[0] + '.md', 'w') do |f|
+    f.write <<EOF
+---
+title: API - Reference - #{name[0]}
+---
+
+### #{name[0]} :: #{name[1]}
+EOF
+  end
+end
+
+task :event, :name do |t, args|
+  name = ARGV.first.gsub(/^event\[(.*)\]$/, '\1').split(' :: ')
+  File.open('./content/api/event/' + name[0] + '.md', 'w') do |f|
+    f.write <<EOF
+---
+title: API - event - #{name[0]}
+---
+
+### event #{name[0]}
+
+#{ if name[1] then
+"## Event Data\n\n" + name[1].split(',').map {|x|
+  "<span class='event-data-field'>" + x.strip + "</span>\n"
+}.join("\n")
+end }
+EOF
+  end
+end
