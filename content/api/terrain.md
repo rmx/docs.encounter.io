@@ -42,3 +42,12 @@ component does not need to be accurate. The function will project the position
 to the closests surface.
 
     pos = terrianGetPositionAt 'default', 0, 0, 0
+
+
+### terrainGetTileByIndex :: (String, Number) -> TerrainTile
+
+### terrainPositionGetTile :: (TerrainPosition) -> TerrainTile
+
+### terrainPositionSetFacing :: (TerrainPosition, Number) ->
+
+### terrainTileGetPosition :: (TerrainTile, Number, Number) -> TerrainPosition

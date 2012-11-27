@@ -32,6 +32,12 @@ Remove the given WorldObject from the game. This causes the object to be
 immediately disappear on the client.
 
 
+### unitGetName :: (WorldObject) -> String
+
+### isAlive :: (WorldObject) -> Boolean
+
+### unitSpeak :: (WorldObject, String) -> Event
+
 
 ## Position
 
@@ -127,6 +133,15 @@ each other.
     event = unitTriggerCooldown self, 'GLOBAL', 1.5
     eventAppend e, event
 
+### unitTriggerGlobalCooldown :: (WorldObject, Number) -> Event
+
+### unitGlobalCooldownActive :: (WorldObject) -> Boolean
+
+### unitTriggerSpellCooldown :: (WorldObject, String, Number) -> Event
+
+### unitSpellCooldownActive :: (WorldObject, String) -> Boolean
+
+
 ## Aura
 
 Each WorldObject has a list of auras. The auras can strengthen or weaken the
@@ -158,3 +173,32 @@ commands.
 
 Moves a unit along a list of terrain positions (waypoints). Consecutive calls
 to this method overwrite previous move commands
+
+
+## Modifiers
+
+### Modifier :: (Number, Number, Number, Number) -> Modifier
+
+Create a new modifier. All parameters are optional. If not present, they will
+be ignored by the combinator.
+
+
+## Behavior
+
+### hasOwnBehavior :: (WorldObject) -> Boolean
+
+Returns true if the object has a server-side script which controls its
+behavior.
+
+### unitChangeBehaviorState :: (WorldObject, String) ->
+
+Change the behavior state. If the state is not valid, throws an error.
+
+
+## Score
+
+## setTeamScore :: (WorldObject, Number) ->
+
+Set the score of the team in which the given WorldObject is. Then first
+argument is currently ignored, as it's not possible to create multi-team
+encounters.
