@@ -19,7 +19,7 @@ body {
   margin: 0 20px;
 }
 #content {
-  margin-left: 200px;
+  overflow: hidden;
 }
 a {
   color: #08C;
@@ -128,29 +128,25 @@ article .content {
 }
 
 #docs {
+    border-radius: 5px;
+    border: 1px solid #CFCFCF;
+    background: white;
+    padding: 30px 40px;
+    border-left: 1px solid #CFCFCF;
+    box-shadow: 0 0 1px #CFCFCF inset;
+    margin-left: 220px;
+}
+
+#sidebar {
     background: #F1F3F4;
     border-radius: 5px;
     border: 1px solid #CFCFCF;
     box-shadow: 0 0 1px #CFCFCF inset;
-}
-
-#content {
-    min-height: 570px;
-    background: white;
-    padding: 30px 40px;
-    border-left: 1px solid #CFCFCF;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    box-shadow: 0 0 1px #CFCFCF inset;
-}
-
-#sidebar {
     width: 200px;
     padding: 8px 0 8px 20px;
     float: left;
     font-size: 16px;
     box-sizing: border-box;
-    margin-top: 10px;
 }
 
 #sidebar * {
@@ -163,13 +159,13 @@ article .content {
     font-weight: normal;
 }
 
-#content h1 {
+#content #docs h1 {
     border-bottom: 1px solid #CCC;
     margin-bottom: 30px;
     font-weight: normal;
 }
 
-#content h2 {
+#content #docs h2 {
     font-size: 20px;
     font-weight: normal;
     margin-top: 20px;
@@ -177,7 +173,7 @@ article .content {
     margin-bottom: 10px;
 }
 
-#content h3 {
+#content #docs h3 {
     font: 16px "ubuntu-mono", monospace;
     border: 1px solid #DDD;
     border-radius: 2px;

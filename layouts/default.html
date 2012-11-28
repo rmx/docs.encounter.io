@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -20,7 +21,7 @@
     </ul>
 </header>
 
-<div id="docs">
+<div id="content">
     <div id="sidebar">
         <a href="/">Introduction</a>
 
@@ -61,7 +62,7 @@
         </ul>
     </div>
 
-    <div id="content">
+    <div id="docs">
         <%= yield %>
     </div>
 </div>
@@ -89,5 +90,25 @@
         s.parentNode.insertBefore(t, s);
     })();
 </script>
+
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
 </body>
 </html>
