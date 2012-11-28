@@ -4,7 +4,7 @@ title: API - Reference - eventName
 
 ### eventName :: (Event) -> String
 
-Return the name of the given event. See [here](/api/events/) for a complete
+Return the name of the given event. See [here](/api/event/) for a complete
 list of events.
 
 
