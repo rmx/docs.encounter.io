@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - API - Sound</title>
+    <title>encounter docs - API - Reference - worldGetUnits</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -20,7 +21,7 @@
     </ul>
 </header>
 
-<div id="docs">
+<div id="content">
     <div id="sidebar">
         <a href="/">Introduction</a>
 
@@ -32,9 +33,11 @@
             <li><a href="/game-mechanics/">Game Mechanics</a></li>
         </ul>
 
-        <h2>Events</h2>
+        <h2>Concepts</h2>
         <ul>
-            <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
         </ul>
 
         <h2>API</h2>
@@ -42,10 +45,6 @@
             <li><a href="/api/">Overview</a></li>
             <li><a href="/api/ref/">Reference</a></li>
             <li><a href="/api/event/">Events</a></li>
-            <li><a href="/api/prng/">PRNG</a></li>
-            <li><a href="/api/objectives/">Objectives</a></li>
-            <li><a href="/api/achievements/">Achievements</a></li>
-            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -63,28 +62,16 @@
         </ul>
     </div>
 
-    <div id="content">
-        <h2>Types</h2>
+    <div id="docs">
+        <h3>worldGetUnits :: () -&gt; [ WorldObject ]</h3>
 
-<h3>SoundSettings</h3>
+<p>The list of all objects in the world. You can use the <code>listFilter</code> function to
+filter these objects to select only those that you want. The following example
+gets a list of objects within 5 meters of self:</p>
 
-<p>All time values are expressed in seconds.</p>
-
-<ul>
-<li>duration :: Number</li>
-<li>volume :: Number</li>
-<li>delay :: Number</li>
-<li>looped :: Boolean</li>
-</ul><h2>Function</h2>
-
-<h3>soundPlay :: (String, SoundSettings) -&gt; ID</h3>
-
-<p>Start playing the sound. The settings specify the volume, delay etc. The
-function returns the sound ID which you can use to stop the sound.</p>
-
-<h3>soundStop :: (ID) -&gt;</h3>
-
-<h3>terrainSetAmbientSound :: (String, String) -&gt;</h3>
+<pre><code>targets = listFilter worldGetUnits(), (obj) -&gt;
+    distanceBetween(self, obj) &lt; 5
+</code></pre>
     </div>
 </div>
 
@@ -111,5 +98,25 @@ function returns the sound ID which you can use to stop the sound.</p>
         s.parentNode.insertBefore(t, s);
     })();
 </script>
+
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
 </body>
 </html>

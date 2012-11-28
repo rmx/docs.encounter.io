@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - API - Objectives</title>
+    <title>encounter docs - API - Reference - controllingPlayer</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -20,7 +21,7 @@
     </ul>
 </header>
 
-<div id="docs">
+<div id="content">
     <div id="sidebar">
         <a href="/">Introduction</a>
 
@@ -32,9 +33,11 @@
             <li><a href="/game-mechanics/">Game Mechanics</a></li>
         </ul>
 
-        <h2>Events</h2>
+        <h2>Concepts</h2>
         <ul>
-            <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
         </ul>
 
         <h2>API</h2>
@@ -42,10 +45,6 @@
             <li><a href="/api/">Overview</a></li>
             <li><a href="/api/ref/">Reference</a></li>
             <li><a href="/api/event/">Events</a></li>
-            <li><a href="/api/prng/">PRNG</a></li>
-            <li><a href="/api/objectives/">Objectives</a></li>
-            <li><a href="/api/achievements/">Achievements</a></li>
-            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -63,40 +62,16 @@
         </ul>
     </div>
 
-    <div id="content">
-        <h1>Objectives</h1>
+    <div id="docs">
+        <h3>controllingPlayer :: (WorldObject) -&gt; Maybe Player</h3>
 
-<p>Objectives are hints that are displayed on the client, They show the player
-what he has to complete in order to win the game. They are optional, it's
-perfectly ok to not show any objectives and let the player figure out himself
-what to do.</p>
+<p>If the given WorldObject is controlled by a player, then return the player.
+Otherwise return null.</p>
 
-<p>Currently only WorldObjects can be objectives. If a WorldObject is marked as
-objective (the <em>boss</em> which has to be killed), its health bar is dislpayed in
-the objective list on the client (top right corner). This way the <em>boss</em> is
-always visible to all players, even if the player doesn't have the boss in its
-target (useful for <em>healer</em> roles, which usually have one of their team
-members targetted).</p>
+<h2>See Also</h2>
 
-<p>Newly created objectives are marked as <em>not cleared</em>. Meaning they have not
-yet been completed. Once the objective is completed, you can mark it as
-<em>cleared</em>. The client will display cleared objectives with a green-ish color.</p>
-
-<p>Once an objective is cleared, it can not be un-cleared again. But you can
-remove objectives, if you want to guide the players through multiple
-consecutive objectives.</p>
-
-<h3>createObjective :: (WorldObject) -&gt; undefined</h3>
-
-<p>Create a new objective from the given WorldObject.</p>
-
-<h3>clearObjective :: (WorldObject) -&gt; undefined</h3>
-
-<p>If the given WorldObject is an objective, mark it as cleared.</p>
-
-<h3>removeObjective :: (WorldObject) -&gt; undefined</h3>
-
-<p>If the given WorldObject is an objective, remove it.</p>
+<p><a href="/api/ref/WorldObject/">WorldObject</a>,
+<a href="/api/ref/Player/">Player</a></p>
     </div>
 </div>
 
@@ -123,5 +98,25 @@ consecutive objectives.</p>
         s.parentNode.insertBefore(t, s);
     })();
 </script>
+
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
 </body>
 </html>

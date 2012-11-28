@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -20,7 +21,7 @@
     </ul>
 </header>
 
-<div id="docs">
+<div id="content">
     <div id="sidebar">
         <a href="/">Introduction</a>
 
@@ -32,9 +33,11 @@
             <li><a href="/game-mechanics/">Game Mechanics</a></li>
         </ul>
 
-        <h2>Events</h2>
+        <h2>Concepts</h2>
         <ul>
-            <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
         </ul>
 
         <h2>API</h2>
@@ -42,10 +45,6 @@
             <li><a href="/api/">Overview</a></li>
             <li><a href="/api/ref/">Reference</a></li>
             <li><a href="/api/event/">Events</a></li>
-            <li><a href="/api/prng/">PRNG</a></li>
-            <li><a href="/api/objectives/">Objectives</a></li>
-            <li><a href="/api/achievements/">Achievements</a></li>
-            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -63,7 +62,7 @@
         </ul>
     </div>
 
-    <div id="content">
+    <div id="docs">
         <h3>unitWalkTo :: (WorldObject, TerrainPosition) -&gt; Boolean</h3>
 
 <p>Uses the pathfinder to first compute a path from the units position to the
@@ -96,5 +95,25 @@ commands.</p>
         s.parentNode.insertBefore(t, s);
     })();
 </script>
+
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
 </body>
 </html>

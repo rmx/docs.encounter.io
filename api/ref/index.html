@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -20,7 +21,7 @@
     </ul>
 </header>
 
-<div id="docs">
+<div id="content">
     <div id="sidebar">
         <a href="/">Introduction</a>
 
@@ -32,9 +33,11 @@
             <li><a href="/game-mechanics/">Game Mechanics</a></li>
         </ul>
 
-        <h2>Events</h2>
+        <h2>Concepts</h2>
         <ul>
-            <li><a href="/events/spell/">Spell</a></li>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
         </ul>
 
         <h2>API</h2>
@@ -42,10 +45,6 @@
             <li><a href="/api/">Overview</a></li>
             <li><a href="/api/ref/">Reference</a></li>
             <li><a href="/api/event/">Events</a></li>
-            <li><a href="/api/prng/">PRNG</a></li>
-            <li><a href="/api/objectives/">Objectives</a></li>
-            <li><a href="/api/achievements/">Achievements</a></li>
-            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -63,12 +62,15 @@
         </ul>
     </div>
 
-    <div id="content">
+    <div id="docs">
         <h1>Alphabetical list of all types and functions</h1>
 
 <ul>
 <li><p><a href="/api/ref/Achievement/">Achievement</a></p></li>
 <li><p><a href="/api/ref/awardAchievement/">awardAchievement</a></p></li>
+<li><p><a href="/api/ref/clearObjective/">clearObjective</a></p></li>
+<li><p><a href="/api/ref/controllingPlayer/">controllingPlayer</a></p></li>
+<li><p><a href="/api/ref/createObjective/">createObjective</a></p></li>
 <li><p><a href="/api/ref/currentTime/">currentTime</a></p></li>
 <li><p><a href="/api/ref/debug/">debug</a></p></li>
 <li><p><a href="/api/ref/Event/">Event</a></p></li>
@@ -83,13 +85,25 @@
 <li><p><a href="/api/ref/Modifier/">Modifier</a></p></li>
 <li><p><a href="/api/ref/paramGet/">paramGet</a></p></li>
 <li><p><a href="/api/ref/Player/">Player</a></p></li>
+<li><p><a href="/api/ref/players/">players</a></p></li>
+<li><p><a href="/api/ref/random/">random</a></p></li>
+<li><p><a href="/api/ref/randomBetween/">randomBetween</a></p></li>
+<li><p><a href="/api/ref/randomIntBetween/">randomIntBetween</a></p></li>
+<li><p><a href="/api/ref/removeObjective/">removeObjective</a></p></li>
 <li><p><a href="/api/ref/setTeamScore/">setTeamScore</a></p></li>
+<li><p><a href="/api/ref/shuffleBagAdd/">shuffleBagAdd</a></p></li>
+<li><p><a href="/api/ref/shuffleBagCreate/">shuffleBagCreate</a></p></li>
+<li><p><a href="/api/ref/shuffleBagNext/">shuffleBagNext</a></p></li>
+<li><p><a href="/api/ref/soundPlay/">soundPlay</a></p></li>
+<li><p><a href="/api/ref/SoundSettings/">SoundSettings</a></p></li>
+<li><p><a href="/api/ref/soundStop/">soundStop</a></p></li>
 <li><p><a href="/api/ref/terrainCreate/">terrainCreate</a></p></li>
 <li><p><a href="/api/ref/terrainGetPositionAt/">terrainGetPositionAt</a></p></li>
 <li><p><a href="/api/ref/terrainGetTileByIndex/">terrainGetTileByIndex</a></p></li>
 <li><p><a href="/api/ref/TerrainPosition/">TerrainPosition</a></p></li>
 <li><p><a href="/api/ref/terrainPositionGetTile/">terrainPositionGetTile</a></p></li>
 <li><p><a href="/api/ref/terrainPositionSetFacing/">terrainPositionSetFacing</a></p></li>
+<li><p><a href="/api/ref/terrainSetAmbientSound/">terrainSetAmbientSound</a></p></li>
 <li><p><a href="/api/ref/terrainTileGetPosition/">terrainTileGetPosition</a></p></li>
 <li><p><a href="/api/ref/unitAttributeChangeBy/">unitAttributeChangeBy</a></p></li>
 <li><p><a href="/api/ref/unitAttributeGet/">unitAttributeGet</a></p></li>
@@ -114,6 +128,7 @@
 <li><p><a href="/api/ref/unitWalkTo/">unitWalkTo</a></p></li>
 <li><p><a href="/api/ref/worldCreateUnit/">worldCreateUnit</a></p></li>
 <li><p><a href="/api/ref/worldDeleteUnit/">worldDeleteUnit</a></p></li>
+<li><p><a href="/api/ref/worldGetUnits/">worldGetUnits</a></p></li>
 <li><p><a href="/api/ref/WorldObject/">WorldObject</a></p></li>
 </ul>
     </div>
@@ -142,5 +157,25 @@
         s.parentNode.insertBefore(t, s);
     })();
 </script>
+
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
 </body>
 </html>
