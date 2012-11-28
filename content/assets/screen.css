@@ -134,7 +134,7 @@ article .content {
     padding: 30px 40px;
     border-left: 1px solid #CFCFCF;
     box-shadow: 0 0 1px #CFCFCF inset;
-    margin-left: 220px;
+    margin-left: 270px;
 }
 
 #sidebar {
@@ -142,8 +142,8 @@ article .content {
     border-radius: 5px;
     border: 1px solid #CFCFCF;
     box-shadow: 0 0 1px #CFCFCF inset;
-    width: 200px;
-    padding: 8px 0 8px 20px;
+    width: 250px;
+    padding: 20px 0 20px 20px;
     float: left;
     font-size: 16px;
     box-sizing: border-box;

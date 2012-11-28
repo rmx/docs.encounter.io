@@ -1,8 +1,8 @@
 ---
-title: Introduction
+title: Concepts - Encounter
 ---
 
-# Introduction
+# What is an Encounter?
 
 An encounter is a short game where one or more players compete against each
 other or a scripted enemy. Encounters are short, even though there is no hard
