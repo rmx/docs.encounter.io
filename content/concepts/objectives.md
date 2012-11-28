@@ -1,5 +1,5 @@
 ---
-title: API - Objectives
+title: Concepts - Objectives
 ---
 
 # Objectives
@@ -23,18 +23,3 @@ _cleared_. The client will display cleared objectives with a green-ish color.
 Once an objective is cleared, it can not be un-cleared again. But you can
 remove objectives, if you want to guide the players through multiple
 consecutive objectives.
-
-
-### createObjective :: (WorldObject) -> undefined
-
-Create a new objective from the given WorldObject.
-
-
-### clearObjective :: (WorldObject) -> undefined
-
-If the given WorldObject is an objective, mark it as cleared.
-
-
-### removeObjective :: (WorldObject) -> undefined
-
-If the given WorldObject is an objective, remove it.
