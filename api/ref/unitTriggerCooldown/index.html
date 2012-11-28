@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - API - Terrain</title>
+    <title>encounter docs - API - Reference - unitTriggerCooldown</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
@@ -35,17 +35,17 @@
         <h2>Events</h2>
         <ul>
             <li><a href="/events/spell/">Spell</a></li>
-            <li><a href="/events/misc/">Miscellaneous</a></li>
         </ul>
 
         <h2>API</h2>
         <ul>
             <li><a href="/api/">Overview</a></li>
-            <li><a href="/api/terrain/">Terrain</a></li>
-            <li><a href="/api/world-object/">WorldObject</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
             <li><a href="/api/prng/">PRNG</a></li>
             <li><a href="/api/objectives/">Objectives</a></li>
             <li><a href="/api/achievements/">Achievements</a></li>
+            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -64,43 +64,18 @@
     </div>
 
     <div id="content">
-        <h1>Terrain</h1>
+        <h3>unitTriggerCooldown :: (WorldObject, String, Number) -&gt; Event</h3>
 
-<h2>Types</h2>
+<p>Trigger a cooldown. A cooldown will prevent the object from casting spells in
+that cooldown category for the given amount of time. Many spells are in the
+<code>GLOBAL</code> cooldown category. This category usually has a short cooldown (1.5
+seconds) and is used to prevent the player from casting spells rapidly after
+each other.</p>
 
-<h3>TerrainPosition</h3>
+<h2>Examples</h2>
 
-<p>Describes a position within a terrain. Each WorldObject has such a position.
-You can create new positions from a terrain and a position within the terrain
-(<code>terrainGetPositionAt</code>), or get from a WorldObject using <code>unitGetPosition</code>.</p>
-
-<h2>Functions</h2>
-
-<h3>terrainCreate :: (String, String) -&gt; undefined</h3>
-
-<p>Create a new instance of a terrain. Each instance is identified by a unique
-tag. You can use this tag to refer to the instance. If your encounter has only
-one terrain, the convention is to use the <code>'default'</code> tag. You should create
-at least one terrain instance in the Glue constructor. Later during the game
-you can create additional instances if required.</p>
-
-<p>The tag must be unique. If your encounter uses multiple terrain instances,
-it's up to you to make sure that the tags are unique. If you try to use a tag
-which already exists, the game will throw an exception.</p>
-
-<pre><code>class Glue
-    constructor: -&gt;
-        terrainCreate 'Maze', 'default'
-</code></pre>
-
-<h3>terrainGetPositionAt :: (String, Number, Number, Number) -&gt; TerrainPosition</h3>
-
-<p>Create a <code>TerrainPosition</code> which represents the position at the x/y/z
-coordinates within the terrain instance identified by the tag. The <code>z</code>
-component does not need to be accurate. The function will project the position
-to the closests surface.</p>
-
-<pre><code>pos = terrianGetPositionAt 'default', 0, 0, 0
+<pre><code class="coffeescript">event = unitTriggerCooldown self, 'GLOBAL', 1.5
+eventSchedule 0, event
 </code></pre>
     </div>
 </div>

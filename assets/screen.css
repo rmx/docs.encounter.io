@@ -15,8 +15,8 @@ body {
   height: 100%;
 }
 #container {
-  width: 940px;
-  margin: 0 auto;
+  min-width: 920px;
+  margin: 0 20px;
 }
 #content {
   margin-left: 200px;
@@ -172,16 +172,19 @@ article .content {
 #content h2 {
     font-size: 20px;
     font-weight: normal;
-    margin-top: 60px;
+    margin-top: 20px;
     border-bottom: 1px solid #CCC;
     margin-bottom: 10px;
 }
 
 #content h3 {
     font: 16px "ubuntu-mono", monospace;
-    margin-top: 60px;
-    background: transparent url(crud-sprite.png) left 2px no-repeat;
-    padding-left: 26px;
+    border: 1px solid #DDD;
+    border-radius: 2px;
+    padding: 3px 6px;
+    background: #F1F1F1;
+    box-shadow: 0 0 2px black;
+    margin: 6px 0;
 }
 
 .minibutton {
@@ -274,4 +277,9 @@ p code, li code {
 
 .oh-1 {
     margin-left: 20px;
+}
+
+.event-data-field {
+    display: inline-block;
+    width:   200px;
 }

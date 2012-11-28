@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - Events - Miscellaneous</title>
+    <title>encounter docs - API - Event - moveTo</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
@@ -35,17 +35,17 @@
         <h2>Events</h2>
         <ul>
             <li><a href="/events/spell/">Spell</a></li>
-            <li><a href="/events/misc/">Miscellaneous</a></li>
         </ul>
 
         <h2>API</h2>
         <ul>
             <li><a href="/api/">Overview</a></li>
-            <li><a href="/api/terrain/">Terrain</a></li>
-            <li><a href="/api/world-object/">WorldObject</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
             <li><a href="/api/prng/">PRNG</a></li>
             <li><a href="/api/objectives/">Objectives</a></li>
             <li><a href="/api/achievements/">Achievements</a></li>
+            <li><a href="/api/sound/">Sound</a></li>
         </ul>
 
         <h2>Scripts</h2>
@@ -64,28 +64,21 @@
     </div>
 
     <div id="content">
-        <h1>Miscellaneous</h1>
+        <h3>event moveTo</h3>
 
-<h3>startGame :: { }</h3>
+<p>This event is generated when a <a href="/api/ref/WorldObject/">WorldObject</a> moved.</p>
 
-<p>The players have started the game. For example by engaging the enemy. Calling
-<code>gameDidStart</code> will cause this event to be fired.</p>
+<h2>Event Data</h2>
 
-<h3>finshGame :: { outcome :: String }</h3>
+<p><span class="event-data-field">object :: WorldObject</span>
+The object which moved.</p>
 
-<p>The game has ended. The outcome property indicates whether the players have
-won (<code>victory</code>) or lost (<code>defeat</code>) the game. Calling <code>gameDidEnd</code> will cause
-this event to be fired.</p>
+<p><span class="event-data-field">position :: TerrainPosition</span>
+The new position to which the object moved.</p>
 
-<h3>moveTo :: (WorldObject, Position)</h3>
+<h2>See Also</h2>
 
-<p>A WorldObject has moved. The event includes the new position where the object
-is located now.</p>
-
-<h3>speak :: (WorldObject, String)</h3>
-
-<p>A WorldObject has spoken. Chat does not count as speaking (though maybe it
-should).</p>
+<p><a href="/api/event/teleportTo/">event/teleportTo</a></p>
     </div>
 </div>
 
