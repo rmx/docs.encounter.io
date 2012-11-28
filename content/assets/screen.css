@@ -4,7 +4,6 @@
 }
 
 body {
-  background: url("texture.png");
   font: 16px/1.4 "myriad-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   color: #333;
@@ -14,9 +13,10 @@ html,
 body {
   height: 100%;
 }
-#container {
-  min-width: 920px;
-  margin: 0 20px;
+.container {
+  width: 980px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 #content {
   overflow: hidden;
@@ -55,51 +55,76 @@ img {
 }
 
 header {
-    position: relative;
-    font-weight: 300;
-    color: #222;
-    padding-left: 10px;
-    margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  position: relative;
+  font-weight: 300;
+  color: #222;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f9f9f9), color-stop(1, #f3f3f3));
+  background-image: -webkit-linear-gradient(top, #f9f9f9 0%, #f3f3f3 100%);
+  background-image: -moz-linear-gradient(top, #f9f9f9 0%, #f3f3f3 100%);
+  background-image: -o-linear-gradient(top, #f9f9f9 0%, #f3f3f3 100%);
+  background-image: -ms-linear-gradient(top, #f9f9f9 0%, #f3f3f3 100%);
+  background-image: linear-gradient(top, #f9f9f9 0%, #f3f3f3 100%);
+  border-bottom: 1px solid #e5e5e5;
+  height: 40px;
+  line-height: 40px;
 }
 header a {
   color: #333;
   text-decoration: none;
-}
-header a:hover {
-  text-decoration: underline;
+  display: inline-block;
 }
 header a.logo {
-  font-size: 28px;
-  font-weight: normal;
+  float: left;
+  font-size: 26px;
   color: #111;
+  z-index: 9;
+  font-family: ff-enzo-web;
+  font-weight: 600;
+}
+header a.logo.problem {
+  text-shadow: #f00 0 0 5px;
+}
+header a.logo:hover {
+  color: #08c;
+  text-decoration: none;
 }
 header a.logo > span {
   font-size: 16px;
 }
-header a.logo > span:first-child {
-  font-size: 22px;
+header .divider-vertical {
+  float: left;
+  width: 1px;
+  height: 40px;
+  margin: 0 10px;
+  background-color: #e5e5e5;
+  border-right: 1px solid #fff;
 }
-
 header #menu {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    list-style-type: none;
-    font-size: 16px;
+  float: right;
+  margin-top: 2px;
+  list-style-type: none;
+}
+header #menu li {
+  display: inline-block;
+  margin-left: 2px;
+  line-height: 40px;
 }
 
 footer {
   display: block;
   padding: 0 10px 20px;
   margin: 20px auto 5px;
-  color: #777;
+  color: #333;
   text-shadow: #fff 0 1px 1px;
   overflow: hidden;
-  font-size: 12px;
-  border-top: 1px solid #ddd;
+  font-size: 15px;
+  border-top: 1px solid #e5e5e5;
   font-weight: 200;
+  background-color: whiteSmoke;
 }
-footer > * {
+footer > .container {
   margin-top: 5px;
 }
 footer p {
