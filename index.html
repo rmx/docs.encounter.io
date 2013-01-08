@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>encounter docs - Introduction</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<header>
+    <div class='container'>
+        <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
+        <div class='divider-vertical'></div>
+        <ul id="menu" class="normal">
+            <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+<div id="content">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+            <li><a href="/game-mechanics/">Game Mechanics</a></li>
+        </ul>
+
+        <h2>Concepts</h2>
+        <ul>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
+        </ul>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><a href="/examples/achievement/">Achievement</a></li>
+        </ul>
+    </div>
+
+    <div id="docs">
+        <h1>Introduction</h1>
+
+<p>An encounter is a short game where one or more players compete against each
+other or a scripted enemy. Encounters are short, even though there is no hard
+limit, they should be no longer than 15 minutes.</p>
+
+<p>There is no fixed goal in an encounter. It's up to you to specify when and
+which players have won or lost. You can either leave it completely up to the
+players to figure that out, or use <a href="/concepts/objectives/">Objectives</a> to give
+players hints what they should do. Here are some ideas:</p>
+
+<ul>
+<li>Kill the boss.</li>
+<li>Collect as many resources as you can (with a fixed time limit).</li>
+<li>Get through a maze as fast as possible.</li>
+</ul><p>Players are grouped into teams. The teams can work together or compete against
+each other. When the game ends, the team with the highest score wins.</p>
+
+<p>Players can also collect <a href="/concepts/achievements/">Achievements</a>. They are
+awarded for outstanding performance and should not be too easy to earn. The
+harder they are to earn, the more they are worth.</p>
+
+<h2>Roles</h2>
+
+<p>Before entering the game, players must chose a role. The role acts as
+a template and defines which attributes and spells their WorldObject will
+have.</p>
+
+<p>This preparation is done in the Wardrobe. Players can inspect the roles, chat,
+strategize and otherwise prepare for the game. When all players are ready,
+they enter the game.</p>
+
+<h2>WorldObjects</h2>
+
+<p>Each <a href="/api/ref/Player/">Player</a> controls
+a <a href="/api/ref/WorldObject/">WorldObject</a>. He can move it around and cast spells
+that are available to it. Only one player can control an object at any given
+time, but it's possible to change the object that a player controls (as long
+as the new object is not already being controlled by somebody).</p>
+
+<h2>Terrains</h2>
+
+<p>Each WorldObject is located in a <a href="/api/ref/Terrain/">Terrain</a>, a continuous
+geometry in which the object can move. It's made of individual tiles placed on
+a grid. An encounter can use multiple terrains and teleport objects (players)
+between them.</p>
+
+<h2>Spells</h2>
+
+<p>Each WorldObject has access to a number of spells which it can cast. The
+<a href="/scripts/spell/">spell script</a> defines what happens when the object starts to
+cast, when it finishes, when it's interrupted etc.</p>
+
+<p>Casting a spell may fail if certain preconditions are not satistfied. Spells
+also may have a cast time, that is the time required to perform the spell.
+During that time the caster may be interrupted.</p>
+
+<h2>Auras</h2>
+
+<p>Auras are attached to WorldObjects and modify or influence how the object
+responds to changes in the game. A typical use-case for an aura would be
+immunity against a certain kind of damage, or periodicallly healing the
+object.</p>
+
+<h2>Cooldowns</h2>
+
+<p>Cooldowns limit the number of spells a player can cast. This is to prevent the
+server from overloading and to force players to carefully think which before
+using a spell (instead of blindly bashing the keyboard).</p>
+
+<p>There are three types of cooldowns: <em>Global</em>, <em>Spell</em>, <em>Named</em>. Each
+WorldObject has one global cooldown timer, one timer for each spell cooldown
+and one for each named cooldown. Spells can decide which cooldown timers they
+want to honor. While any of those cooldowns is active, the spell may not be
+used.</p>
+    </div>
+</div>
+</div>
+
+<footer>
+<div class='container'>
+    <span>© rmx inc.</span>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</div>
+</footer>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
+</body>
+</html>
