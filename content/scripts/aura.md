@@ -39,6 +39,9 @@ triggers itself, this can also be used to implement periodic actions.
 ### remove :: undefined
 
 Called by the `removeAura` event.
+**Caution:** `removeAura` removes all unprocessed events of the aura. This
+implies that all `scheduleEvent` calls in `remove` of an aura **will be
+immediately discarded** (even if the delay is 0).
 
 
 ### hasFinished :: Boolean
