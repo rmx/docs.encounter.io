@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="generator" content="nanoc 3.2.4">
 
-    <title>encounter docs - API - Reference - currentTime</title>
+    <title>encounter docs - Concept - Modifiers</title>
     <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
 
@@ -66,25 +66,65 @@
     </div>
 
     <div id="docs">
-        <h3>currentTime :: Number</h3>
+        <h1>Modifiers</h1>
 
-<p>The current time in the game. It's represented as the number of seconds since
-an unspecified time in the past.</p>
+<h2>castTime</h2>
 
-<h2>Examples</h2>
+<dl>
+<dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
 
-<pre><code class="coffeescript">class Aura
+  <dt>Application</dt>
+  <dd>
+    When calculating the effective spell castTime, this modifier is applied to
+    the castTime base. The resulting value is clamped so it doesn't fall below
+    the castTime minimum.
+  </dd>
+</dl><h2>range</h2>
 
-    constructor: -&gt;
-        @startedAt = currentTime
+<dl>
+<dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
 
-    handleEvent: -&gt;
-        diff = currentTime - @startedAt
-</code></pre>
+  <dt>Application</dt>
+  <dd>
+    This modifier applies to the spell range.
+  </dd>
+</dl><h2>duration</h2>
 
-<h2>See Also</h2>
+<dl>
+<dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
 
-<p><a href="/api/ref/eventSchedule/">eventSchedule</a></p>
+  <dt>Application</dt>
+  <dd>
+    When an aura is added to a WorldObject the first time, this modifier is
+    applied to its duration.
+
+    It is unclear yet how this applies when the aura is refreshed.
+  </dd>
+</dl><h2>tickInterval</h2>
+
+<dl>
+<dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
+
+  <dt>Application</dt>
+  <dd>
+    Same as the duration modifier.
+  </dd>
+</dl><h2>globalCooldown</h2>
+
+<dl>
+<dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
+
+  <dt>Application</dt>
+  <dd>
+    When the global cooldown of a WorldObject is triggered, this modifier
+    is applied to the duration.
+  </dd>
+</dl>
     </div>
 </div>
 </div>
