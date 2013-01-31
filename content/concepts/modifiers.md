@@ -73,3 +73,43 @@ title: Concept - Modifiers
     is applied to the duration.
   </dd>
 </dl>
+
+
+## maxHealth
+
+<dl>
+  <dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
+
+  <dt>Application</dt>
+  <dd>
+    Changes the maximum health.
+  </dd>
+</dl>
+
+
+## scale
+
+<dl>
+  <dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
+
+  <dt>Application</dt>
+  <dd>
+    Applied to the WorldObject scale. Used to draw the model at the correct
+    scale on the client.
+  </dd>
+</dl>
+
+
+## movementSpeed
+
+<dl>
+  <dt>Formula</dt>
+  <dd>Standard Numeric Formula</dd>
+
+  <dt>Application</dt>
+  <dd>
+    Changes the base movement speed.
+  </dd>
+</dl>
