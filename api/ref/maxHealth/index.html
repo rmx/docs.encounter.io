@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>encounter docs - API - Reference - maxHealth</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<header>
+    <div class='container'>
+        <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
+        <div class='divider-vertical'></div>
+        <ul id="menu" class="normal">
+            <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+<div id="content">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+            <li><a href="/game-mechanics/">Game Mechanics</a></li>
+        </ul>
+
+        <h2>Concepts</h2>
+        <ul>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/modifiers/">Modifiers</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
+        </ul>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><a href="/examples/achievement/">Achievement</a></li>
+        </ul>
+    </div>
+
+    <div id="docs">
+        <h3>maxHealth :: (WorldObject) -&gt; Number</h3>
+    </div>
+</div>
+</div>
+
+<footer>
+<div class='container'>
+    <span>© rmx inc.</span>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</div>
+</footer>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
+</body>
+</html>
