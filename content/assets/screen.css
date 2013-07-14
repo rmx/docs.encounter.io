@@ -304,3 +304,18 @@ p code, li code {
     display: inline-block;
     width:   200px;
 }
+
+dl {
+    margin-left: 10px;
+}
+dt {
+    color: #444;
+    font-weight: bold;
+    float: left;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+dd {
+    padding-left: 110px;
+}
