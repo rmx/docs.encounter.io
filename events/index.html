@@ -57,6 +57,7 @@
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
             <li><a href="/scripts/spell/">Spell</a></li>
+            <li><a href="/scripts/particleeffect/">Particle Effect</a></li>
         </ul>
 
         <h2>Examples</h2>
@@ -109,19 +110,24 @@ in certain cases (e.g. a damage shield). More specifically an aura can</p>
 <ul>
 <li>modify the event arguments</li>
 <li>post reaction events (directly inserted in Combat Log)</li>
-</ul><p>When a Combat Log Event is processed the following stages are executed:</p>
+</ul>
+
+<p>When a Combat Log Event is processed the following stages are executed:</p>
 
 <ul>
 <li>Event source and target unit can react.</li>
 <li>Apply the event (and all reactions) to the game state.</li>
 <li>Check if any units are dead.</li>
-</ul><p>In the case multiple auras are present, the following evaluation ordering is
+</ul>
+
+<p>In the case multiple auras are present, the following evaluation ordering is
 used to resolve conflicts:</p>
 
 <ul>
 <li>Auras on the source unit, sorted by priority</li>
 <li>Auras on the target unit, sorted by priority</li>
 </ul>
+
     </div>
 </div>
 </div>

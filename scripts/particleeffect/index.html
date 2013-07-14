@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>encounter docs - encounter docs - particle effect</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<header>
+    <div class='container'>
+        <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
+        <div class='divider-vertical'></div>
+        <ul id="menu" class="normal">
+            <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+<div id="content">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+            <li><a href="/game-mechanics/">Game Mechanics</a></li>
+        </ul>
+
+        <h2>Concepts</h2>
+        <ul>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/modifiers/">Modifiers</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
+            <li><a href="/scripts/particleeffect/">Particle Effect</a></li>
+        </ul>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><a href="/examples/achievement/">Achievement</a></li>
+        </ul>
+    </div>
+
+    <div id="docs">
+        <h1>Particle Effect</h1>
+
+<p>We implemented a particle engine based on the paradigm of
+<a href="https://github.com/zz85/sparks.js">SPARKS.js</a>.
+Particles are emitted from a source emitter with some specific characteristics
+(denoted <code>initializers</code>), e.g.  color and size, and can be influenced with the
+help of <code>modifiers</code>. As the name suggests the <code>initializers</code> affect the
+particle properties at creation where <code>modifiers</code> are applied as particles age.</p>
+
+<h2>Effect Specification</h2>
+
+<p>Particle effects are specified in JSON objects, e.g. the following implements
+a simple particle effect:</p>
+
+<pre><code>{
+    "source": {
+        "duration" : 2.0,
+        "delay"    : 0.0
+        "counter"  : "steady",
+        "npart"    : 5000,
+        "color"    : [265, 90, 90],
+        "size"     : [1, 3],
+        "offset"   : [0, 0, 0.8],
+        "zone"     : { "SphereCapZone" : ["relunit label", 0.5, 0.6, 80] }
+    },
+    "initializers": [
+        {"lifetime": [0.1, 0.4]}
+    ],
+    "modifiers": [
+        {"age":  []},
+        {"move": []},
+        {"accelerate":  [0.0, 0.0, 0.5]},
+        {"randomdrift": [0.1, 0.1, 0.1]}
+    ]
+}
+</code></pre>
+
+<p>A particle effect has a <code>source</code> entry characterizing the particle emitter and
+two lists of <code>initializers</code> and <code>modifiers</code>. In order to describe meaningful
+positions in particle effects the definition distinguishes two position types:</p>
+
+<ul>
+<li>absolute (coordinates or unit), and</li>
+<li>relative (unit or labeled vertex).</li>
+</ul>
+
+<p>For example in the effect definition above we have,</p>
+
+<pre><code>"SphereCapZone": ["relunit label", 0.5, 0.6, 80]
+</code></pre>
+
+<p>The exact specification of the position is deferred to the spell script (more
+specifically to the <code>particleEffectStart</code> call), where previously defined
+position labels (<code>label</code>) are resolved to world objects, e.g.,</p>
+
+<pre><code>particleEffectStart "name", {label: target}, {}
+</code></pre>
+
+<p>If not otherwise specified, the <code>self</code> label will always point to the
+currently controlled unit. The next two sections discuss how particle effects
+can be started and stopped.  Finally we discuss specialized effects like
+projectiles, aura and ground area effects.</p>
+
+<h3>particleEffectStart(name, settings) :: id</h3>
+
+<p>This script API function can be used to start a specific particle effect. The
+<code>source</code> and <code>target</code> definition in the settings object is mandatory, e.g.:</p>
+
+<pre><code>labels         = { source: self, target: target }
+settings       = { duration: 1.0 }
+part_effect_id = particleEffectStart 'name', labels, settings
+</code></pre>
+
+<h3>particleEffectStop(id) :: undefined</h3>
+
+<p>Can be used to stop a currently active particle effect with id <code>id</code>. This can
+e.g. be used to stop a cast particle effect on spell interruption.</p>
+
+<h2>Specialized Effects</h2>
+
+<p>In many situations we need simple projectiles (e.g. Frostbolt) or effects on
+the ground floor. To simplify the life of the designers we added helper
+methods to trigger these kind of effects without relying on using
+<code>particleEffectStart</code> and <code>particleEffectStop</code>.</p>
+
+<h3>groundAreaEffects(position, duration, radius, auraName, effectName) :: undefined</h3>
+
+<p>In many situations a spell may affect a certain area on the ground floor. To
+accommodate for this situation we provide the <code>groundAreaEffect</code> API function.
+The following call</p>
+
+<pre><code>groundAreaEffect position, 20, 3, "Slow", "Ice Field"
+</code></pre>
+
+<p>creates a circular area of effect at the specified position with radius <code>3</code>
+for <code>20</code> seconds. Additional to displaying the particle effect <code>Ice Field</code>,
+the aura <code>Slow</code> is applied to every unit entering (and removed when leaving)
+the area of effect.</p>
+
+<h3>visualEffectName(name) :: undefined</h3>
+
+<p>To simplify particle effect on Aura ticks, we provide the <code>visualEffectName</code>
+field in aura properties. The following line</p>
+
+<pre><code>visualEffectName: "Stun"
+</code></pre>
+
+<p>starts the particle effect <code>Stun</code> when the aura ticks.</p>
+
+<h3>projectile(speed, name) :: undefined</h3>
+
+<p>Using particle systems in projectiles (e.g. Frostbolt) can be simplified by
+using the <code>projectile</code> property in the spell descriptor. The projectile takes
+two arguments: its speed and name of the particle effect:</p>
+
+<pre><code>projectile: { 10, "Frostbolt" }
+</code></pre>
+
+<h2>Zone</h2>
+
+<p>Zones are used to describe surfaces or volumes where particles are emitted or
+modifiers are applied. The following zones are currently available:</p>
+
+<ul>
+<li><code>CubeZone</code></li>
+<li><code>DiscZone</code></li>
+<li><code>LineZone</code></li>
+<li><code>PointZone</code></li>
+<li><code>ParallelogramZone</code></li>
+<li><code>SphereCapZone</code></li>
+</ul>
+
+<p>In the following we briefly introduce the arguments of these zones.</p>
+
+<h3>"CubeZone": [position, x, y, z]</h3>
+
+<p>Creates a cube zone with origin <code>position</code> and <code>x</code> width, <code>y</code> depth and <code>z</code>
+height.</p>
+
+<h3>"DiscZone": [center, radiusNormal, outerRadius, innerRadius]</h3>
+
+<p>Creates a "2D" disc perpendicular to the specified <code>radiusNormal</code> around
+<code>center</code> with the radius <code>outerRadius</code>. If an <code>innerRadius</code> is specified the
+disc will a hole.</p>
+
+<h3>"LineZone": [start, end]</h3>
+
+<p>Creates a line zone form <code>start</code> to <code>end</code> position.</p>
+
+<h3>"PointZone": [position]</h3>
+
+<p>Creates a point zone in <code>position</code>.</p>
+
+<h3>"ParallelogramZone": [corner, side1, side2]</h3>
+
+<p>Creates a rectangular like shape spanned from the origin in <code>corner</code> to both
+side endpoints.</p>
+
+<h3>"SphereCapZone": [origin, minr, maxr, phi]</h3>
+
+<p>Creates a half dome zone centered in the specified origin between <code>minr</code> and
+<code>maxr</code> with an opening of <code>phi</code></p>
+
+<h2>Source</h2>
+
+<p>The source field completely specifies the particle emitter.</p>
+
+<ul>
+<li>
+<code>duration</code>: travel time to target (in seconds). Only used for projectiles
+          and require a <code>target</code> field</li>
+<li>
+<code>delay</code>: start the particle effect with a delay (in seconds)</li>
+<li>
+<code>counter</code>: either <code>steady</code> (emits particles over time) or <code>shot</code> (emits all
+         <code>npart</code> particles at once)</li>
+<li>
+<code>npart</code>: number of particles to emit</li>
+<li>
+<code>color</code>: color of the particle in HSV</li>
+<li>
+<code>size</code>: [min, max] size of particle</li>
+<li>
+<code>offset</code>: offset from <code>source</code>/<code>target</code> position if used</li>
+<li>
+<code>zone</code>:</li>
+</ul>
+
+<p>The following arguments can be overridden by the settings object: <code>duration</code>,
+<code>delay</code>, <code>counter</code>, <code>npart</code>, <code>color</code>, <code>size</code>, <code>offset</code>.</p>
+
+<h2>Initializers</h2>
+
+<p>The available initializers are:</p>
+
+<ul>
+<li>
+<code>"lifetime": [min, max]</code>: lifetime of a particle</li>
+<li>
+<code>"velocity": [zone]</code>: set velocity according to position in zone</li>
+<li>
+<code>"radialvelocity": [outerRadius, innerRadius]</code>: helper to accelerate outward</li>
+</ul>
+
+<h2>Modifiers</h2>
+
+<p>Some modifiers use TWEEN.js for interpolation. The default in all cases is
+<code>linear.none</code>. See
+<a href="https://sole.github.com/tween.js/examples/03_graphs.html">complete list</a> for
+available easing schemes.</p>
+
+<p>At the moment we support the following modifiers:</p>
+
+<ul>
+<li>
+<code>"accelerate": [direction x, direction y, direction z]</code>: accelerate in
+specified 3D direction,</li>
+<li>
+<code>"acceleratefactor": [factor of velocity]</code>: accelerate based on <code>factor</code> of
+particles absolute velocity,</li>
+<li>
+<code>"acceleratevelocity": [factor based on velocity direction]</code>: adapt velocity
+by factor of velocity direction,</li>
+<li>
+<code>"age": [easing]</code>: age particle using tween easing (default: <code>linear.none</code>),</li>
+<li>
+<code>"colorshift": [target hue, target saturation, target value, easing]</code>:
+interpolate from particle color to target color using easing (default:
+linear),</li>
+<li>
+<code>"resize": [target min, target max, easing]</code>: interpolate from particle
+size to target particle size using easing (default: linear),</li>
+<li>
+<code>"move": []</code>: move particles, and</li>
+<li>
+<code>"randomdrift": [drift x, drift y, drift z]</code>: random drift by max. delta
+drift.</li>
+</ul>
+
+<p><strong>Note</strong>: If the particle effect has no <code>move</code> modifier the particles will not
+move and the <code>age</code> is necessary for modifiers relying on the particle age.</p>
+
+<h2>Deathzone</h2>
+
+<p>Deathzones can be used to remove particles traveling through a specific zone.
+For example a rectangular zone can be used to block particles from traveling
+through an opening or window.</p>
+
+<p>Currently we only support <code>CubeZone</code> as deadzone (more will follow soon):</p>
+
+<pre><code>"deathzone": { "CubeZone": [-50, -50, 0, 100, 100, -5] }
+</code></pre>
+
+    </div>
+</div>
+</div>
+
+<footer>
+<div class='container'>
+    <span>© rmx inc.</span>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</div>
+</footer>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -57,6 +57,7 @@
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
             <li><a href="/scripts/spell/">Spell</a></li>
+            <li><a href="/scripts/particleeffect/">Particle Effect</a></li>
         </ul>
 
         <h2>Examples</h2>
@@ -76,7 +77,9 @@
 <li><code>model :: String</code></li>
 <li><code>position :: TerrainPosition</code></li>
 <li><code>spells :: List[String]</code></li>
-</ul><h2>Optional properties</h2>
+</ul>
+
+<h2>Optional properties</h2>
 
 <ul>
 <li><code>behavior :: String</code></li>
@@ -84,7 +87,9 @@
 <li><code>maxHealth :: Number</code></li>
 <li><code>movementSpeed :: Number</code></li>
 <li><code>scale :: Number</code></li>
-</ul><h2>Example</h2>
+</ul>
+
+<h2>Example</h2>
 
 <pre><code class="language-coffeescript"><span class="nv">baseTemplate = </span><span class="nx">worldObjectTemplate</span> <span class="s">"Monster"</span>
 <span class="nv">bossMirrorTemplate = </span><span class="nx">bossTemplate</span> <span class="p">{</span> <span class="nv">movementSpeed: </span><span class="mi">1</span> <span class="p">}</span>
@@ -96,6 +101,7 @@
 
 <p><a href="/api/ref/worldObjectTemplate/">worldObjectTemplate</a>,
 <a href="/api/ref/createWorldObject/">createWorldObject</a></p>
+
     </div>
 </div>
 </div>
