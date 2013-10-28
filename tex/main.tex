@@ -1,0 +1,33 @@
+\documentclass[a4paper]{book}
+\usepackage{fullpage}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{chains,matrix,scopes,decorations.shapes,arrows,shapes,positioning,trees}
+\usepackage{amsmath}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Title
+% ------------------------------------------------------------------------------
+\frontmatter
+\title{Encounter combat rules}
+\author{www.encounter.io\\ rmx.im}
+\date{October 2013}
+\maketitle
+\clearpage
+\tableofcontents
+\clearpage
+
+% Main matter
+\mainmatter
+\input{action}
+\input{damage}
+
+% Appendices
+\appendix
+\input{constants}
+
+\backmatter
+
+\end{document}
