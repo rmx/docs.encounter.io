@@ -1,0 +1,171 @@
+\chapter{Attack}
+
+\subsection*{Attack process}
+
+\begin{enumerate}
+	\item  Determine the attack outcome (miss, hit, crit, ...)
+	\item  Apply the damage to the target
+	\item  Process any procs on the caster and the target(on hit, on being hit, ...)
+\end{enumerate}
+
+\subsection*{Properties of a damaging attack}
+
+\begin{tabular}{p{4cm} l l}
+\toprule
+Property & Description & Default \\
+\midrule
+Damage amount & Distribution of the base damage & required \\
+Damage type & The type of damage, e.g., \emph{fire} & \emph{physical} \\
+Hit chance & Hit chance bonus & 0\% \\
+Crit chance & Crit chance bonus & 0\% \\
+Crit damage & Base damage bonus of critical strikes & 200\% \\
+\bottomrule
+\end{tabular}
+
+\subsection*{Common properties of effects that modify a damaging attack}
+
+\begin{tabular}{p{4cm} p{10cm}}
+\toprule
+Property & Description \\
+\midrule
+Damage type & The type of damage. The effect only modifies an attack if their types are equal. \\
+Stacking category & If there are multiple effects with the same stacking category, only the best effect applies. \\
+\bottomrule
+\end{tabular}
+
+\section{Attack outcome}
+
+\begin{tikzpicture}[
+	->,
+	>=stealth',
+	level/.style={sibling distance = 8cm/#1, level distance = 2.5cm},
+	roll_result/.style={draw, sharp corners, thick, text centered, text width=5em},
+	effect/.style={draw, rounded corners, thick, rectangle split, rectangle split parts=3, text ragged, text width=10em},
+  	] 
+	\node [effect] {
+			\textbf{Immunity}
+			\nodepart{second}
+			Target
+			\nodepart{third}
+		}
+		child {
+			node [roll_result] {Immune}
+		}
+		child {
+			node [effect] {
+				\textbf{Hit chance}
+				\nodepart{second}
+				Source, Target, Effect
+				\nodepart{third}
+				$p \gets 1.0 + \sum{p_i}$
+			}
+		    child{ 
+		    	node [roll_result] {Miss}
+		    }
+	    	child{
+	    		node [effect] {
+					\textbf{Crit chance}
+					\nodepart{second}
+					Source, Target, Effect
+					\nodepart{third}
+					$p \gets 0.0 + \sum{p_i}$
+				}
+				child{ node [roll_result] {Hit}
+				}
+				child{ node [roll_result] {Crit}
+				}
+			}
+		}
+; 
+\end{tikzpicture}
+
+\section{Applying direct damage}
+
+\begin{tikzpicture}[
+	>=stealth',
+	tip/.style={->,shorten >=0.007pt},
+	effect/.style={draw, rounded corners, thick, rectangle split, rectangle split parts=3, text ragged, text width=13em},	
+	terminal/.style={draw, sharp corners, thick, text ragged, text width=13em},
+	connector/.style={draw, ->, thick}
+	]
+	\matrix [row sep=10mm, column sep=5mm] {
+		%--------------------------------------------------------------------
+		&
+		\node (base_dmg)  [terminal] {Base damage $d$};
+		\\
+		&
+		\node (src_add)   [effect]   {
+			\textbf{Additive modifiers}
+			\nodepart{second}
+			Source
+			\nodepart{third}
+			$d \gets d + \sum{m_i}$
+		};
+		&
+		\node (src_mul)   [effect]   {
+			\textbf{Multiplicative modifiers}
+			\nodepart{second}
+			Source
+			\nodepart{third}
+			$d \gets d \cdot \prod{m_i}$
+		};
+		\\
+		\node (crit)  [effect]   {
+			\textbf{Crit damage modifiers}
+			\nodepart{second}
+			Source, Target, Effect
+			\nodepart{third}
+			$d \gets d \cdot \max ( 1 + m_0\prod{m_i}, 1 )$
+		};
+		&
+		\node (tar_mul)   [effect]   {
+			\textbf{Multiplicative modifiers}
+			\nodepart{second}
+			Target
+			\nodepart{third}
+			$d \gets d \cdot \prod{m_i}$
+		};
+		&
+		\node (tar_add)   [effect]   {
+			\textbf{Additive modifiers}
+			\nodepart{second}
+			Target
+			\nodepart{third}
+			$d \gets d + \sum{m_i}$
+		};
+		\\
+		\node (absorb)    [effect]   {
+			\textbf{Absorption}
+			\nodepart{second}
+			Target
+			\nodepart{third}
+			\tabular{@{}l}                        
+        	$a_i \gets \max ( m_i, d ) $ \\
+			$d \gets d - a_i$ \\
+			$m_i \gets m_i - a_i$                    
+            \endtabular
+		};
+		&
+		\node (heal_conv) [effect]   {
+			\textbf{Healing conversion}
+			\nodepart{second}
+			Target
+			\nodepart{third}
+			$d \gets -d$
+		};
+		\\
+		& \node (apply)   [terminal]   {Apply damage to hp};
+		\\
+		%--------------------------------------------------------------------
+	};
+	
+	\path [connector] (base_dmg) -- (src_add);
+    \path [connector] (src_add) -- (src_mul);
+    \path [connector] (src_mul.south) -- ++(0,-5mm) -| (crit.north);
+    \path [connector] (crit) -- (tar_mul);
+    \path [connector] (tar_mul) -- (tar_add);
+    \path [connector] (tar_add.south) -- ++(0,-5mm) -|  (absorb.north);
+    \path [connector] (absorb) -- (heal_conv);
+    \path [connector] (heal_conv) -- (apply);
+\end{tikzpicture}
+
