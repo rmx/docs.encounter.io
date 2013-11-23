@@ -11,6 +11,7 @@ GEM
       cri (~> 2.2)
     nokogiri (1.5.5)
     nokogiri (1.5.5-x86-mingw32)
+    pygmentize (0.0.3)
     rack (1.4.1)
     redcarpet (2.2.2)
     systemu (2.5.2)
@@ -24,5 +25,6 @@ DEPENDENCIES
   mime-types
   nanoc
   nokogiri
+  pygmentize
   redcarpet
   systemu
