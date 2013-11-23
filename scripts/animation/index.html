@@ -105,16 +105,17 @@ new editor, once it is available):</p>
 <pre><code>aUnit = (worldObjectTemplate "Unit") {
     name: "UnitA", behavior: "A", scale: 0.3,
     movementSpeed: 1, positionType: "air"
+}
 </code></pre>
 
-<p>}</p>
+<p>The following API sets a new animation deck for a specific unit</p>
 
 <h3>unitSetAnimationDeck(unit, newDeckName) :: undefined</h3>
 
-<p>Sets the new animation deck for unit. Currently, we support the <code>ground</code> and
-<code>air</code> animation decks. On transition from <code>ground</code> to <code>air</code> the animation with
-the label <code>fly_start</code> (if defined) is played with a 2 seconds duration. In the
-opposite direction we play the animation with the label <code>fly_end</code>.</p>
+<p>Currently, we support the <code>ground</code> and <code>air</code> animation decks.
+On transition from <code>ground</code> to <code>air</code> the animation with the label <code>fly_start</code>
+(if defined) is played with a 2 seconds duration.
+In the opposite direction we play the animation with the label <code>fly_end</code>.</p>
 
 <h2>Naming Conventions</h2>
 
