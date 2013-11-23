@@ -43,15 +43,16 @@ The initial animation deck state can be set in the `worldObjectTemplate`:
     aUnit = (worldObjectTemplate "Unit") {
         name: "UnitA", behavior: "A", scale: 0.3,
         movementSpeed: 1, positionType: "air"
-   }
+    }
 
+The following API sets a new animation deck for a specific unit
 
 ### unitSetAnimationDeck(unit, newDeckName) :: undefined
 
-Sets the new animation deck for unit. Currently, we support the `ground` and
-`air` animation decks. On transition from `ground` to `air` the animation with
-the label `fly_start` (if defined) is played with a 2 seconds duration. In the
-opposite direction we play the animation with the label `fly_end`.
+Currently, we support the `ground` and `air` animation decks.
+On transition from `ground` to `air` the animation with the label `fly_start`
+(if defined) is played with a 2 seconds duration.
+In the opposite direction we play the animation with the label `fly_end`.
 
 
 ## Naming Conventions
