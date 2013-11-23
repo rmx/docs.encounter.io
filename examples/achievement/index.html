@@ -53,6 +53,7 @@
         <h2>Scripts</h2>
         <ul>
             <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/animation/">Animation</a></li>
             <li><a href="/scripts/aura/">Aura</a></li>
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
@@ -73,33 +74,32 @@
 encounter within a given time limit.</p>
 
 <pre><code class="language-coffeescript"><span class="c1"># We store the time limit in a param, so we can easily tweak it.</span>
-<span class="nv">timeLimit = </span><span class="nx">paramGet</span> <span class="nb">Number</span><span class="p">,</span> <span class="s">'speedRunLimit'</span>
+<span class="nx">timeLimit</span> <span class="o">=</span> <span class="nx">paramGet</span> <span class="nb">Number</span><span class="p">,</span> <span class="s1">'speedRunLimit'</span>
 
 <span class="c1"># Helper which returns true if the event indicates that the game has</span>
 <span class="c1"># finished and players have won.</span>
-<span class="nv">isVictoryEvent = </span><span class="nf">(e) -&gt;</span>
-    <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'finishGame'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">eventData</span> <span class="nx">e</span><span class="p">,</span> <span class="s">'outcome'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'victory'</span>
+<span class="nx">isVictoryEvent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'finishGame'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">eventData</span> <span class="nx">e</span><span class="p">,</span> <span class="s1">'outcome'</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'victory'</span>
 
-<span class="k">class</span> <span class="nx">Achievement</span>
+<span class="nx">class</span> <span class="nx">Achievement</span>
 
-    <span class="nv">constructor: </span><span class="nf">-&gt;</span>
-        <span class="vi">@startedAt = </span><span class="kc">null</span>
+    <span class="nv">constructor: </span><span class="o">-&gt;</span>
+        <span class="err">@</span><span class="nx">startedAt</span> <span class="o">=</span> <span class="kc">null</span>
 
 
-    <span class="nv">handleEvent: </span><span class="nf">(e) -&gt;</span>
+    <span class="nv">handleEvent: </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">-&gt;</span>
 
         <span class="c1"># Store the time when players start the game (engage the boss).</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s">'startGame'</span>
-            <span class="vi">@startedAt = </span><span class="nx">currentTime</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">eventName</span> <span class="nx">e</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'startGame'</span>
+            <span class="err">@</span><span class="nx">startedAt</span> <span class="o">=</span> <span class="nx">currentTime</span>
 
         <span class="c1"># If the players win the game within the limit, give them all this</span>
         <span class="c1"># achievement.</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isVictoryEvent</span> <span class="nx">e</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">currentTime</span> <span class="o">-</span> <span class="nx">@startedAt</span> <span class="o">&lt;</span> <span class="nx">timeLimit</span>
-            <span class="nx">forEach</span> <span class="nx">players</span><span class="p">,</span> <span class="nf">(x) -&gt;</span> <span class="nx">awardAchievement</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">self</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isVictoryEvent</span> <span class="nx">e</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">currentTime</span> <span class="o">-</span> <span class="err">@</span><span class="nx">startedAt</span> <span class="o">&lt;</span> <span class="nx">timeLimit</span>
+            <span class="nx">forEach</span> <span class="nx">players</span><span class="p">,</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">awardAchievement</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">self</span>
 
 
-<span class="nv">module.exports = </span><span class="nx">Achievement</span></code></pre>
-
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Achievement</span></code></pre>
     </div>
 </div>
 </div>

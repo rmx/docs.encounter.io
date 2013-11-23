@@ -53,6 +53,7 @@
         <h2>Scripts</h2>
         <ul>
             <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/animation/">Animation</a></li>
             <li><a href="/scripts/aura/">Aura</a></li>
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
@@ -77,9 +78,7 @@
 <li><code>model :: String</code></li>
 <li><code>position :: TerrainPosition</code></li>
 <li><code>spells :: List[String]</code></li>
-</ul>
-
-<h2>Optional properties</h2>
+</ul><h2>Optional properties</h2>
 
 <ul>
 <li><code>behavior :: String</code></li>
@@ -87,21 +86,18 @@
 <li><code>maxHealth :: Number</code></li>
 <li><code>movementSpeed :: Number</code></li>
 <li><code>scale :: Number</code></li>
-</ul>
+</ul><h2>Example</h2>
 
-<h2>Example</h2>
+<pre><code class="language-coffeescript"><span class="nx">baseTemplate</span> <span class="o">=</span> <span class="nx">worldObjectTemplate</span> <span class="s2">"Monster"</span>
+<span class="nx">bossMirrorTemplate</span> <span class="o">=</span> <span class="nx">bossTemplate</span> <span class="p">{</span> <span class="nv">movementSpeed: </span><span class="mi">1</span> <span class="p">}</span>
 
-<pre><code class="language-coffeescript"><span class="nv">baseTemplate = </span><span class="nx">worldObjectTemplate</span> <span class="s">"Monster"</span>
-<span class="nv">bossMirrorTemplate = </span><span class="nx">bossTemplate</span> <span class="p">{</span> <span class="nv">movementSpeed: </span><span class="mi">1</span> <span class="p">}</span>
-
-<span class="nv">position = </span><span class="nx">terrainGetPositionAt</span> <span class="s">"terrain"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nx">position</span> <span class="o">=</span> <span class="nx">terrainGetPositionAt</span> <span class="s2">"terrain"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 <span class="nx">createWorldObject</span> <span class="nx">bossMirrorTemplate</span> <span class="p">{</span> <span class="nx">position</span> <span class="p">}</span></code></pre>
 
 <h2>See Also</h2>
 
 <p><a href="/api/ref/worldObjectTemplate/">worldObjectTemplate</a>,
 <a href="/api/ref/createWorldObject/">createWorldObject</a></p>
-
     </div>
 </div>
 </div>

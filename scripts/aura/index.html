@@ -53,6 +53,7 @@
         <h2>Scripts</h2>
         <ul>
             <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/animation/">Animation</a></li>
             <li><a href="/scripts/aura/">Aura</a></li>
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
@@ -123,9 +124,7 @@ UI:</p>
 <code>stacks</code>: number of aura stacks</li>
 <li>
 <code>duration</code>: remaining duration the aura is active</li>
-</ul>
-
-<p>Note: The <code>duration</code> field will be used as a default duration of an aura and a
+</ul><p>Note: The <code>duration</code> field will be used as a default duration of an aura and a
 <code>removeAura</code> event will be scheduled automatically on <code>start</code>.</p>
 
 <h2>Convenience Functions</h2>
@@ -136,7 +135,6 @@ UI:</p>
 
 <p>Increases or decreases the aura (<code>name</code>) duration on <code>target</code> by <code>delta_t</code>.
 Pending <code>removeAura</code> events are altered when this function is invoked.</p>
-
     </div>
 </div>
 </div>

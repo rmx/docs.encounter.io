@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="nanoc 3.2.4">
+
+    <title>encounter docs - encounter docs - animations</title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/pygments.css" media="screen">
+
+    <script type="text/javascript" src="//use.typekit.com/nli5ftd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<header>
+    <div class='container'>
+        <a href="/" class="logo"><span>docs.</span>encounter<span>.io</span></a>
+        <div class='divider-vertical'></div>
+        <ul id="menu" class="normal">
+            <li><a href="http://encounter.io" class="minibutton"><span>encounter.io</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+<div id="content">
+    <div id="sidebar">
+        <a href="/">Introduction</a>
+
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="/state-machine/">State Machine</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/terrain/">Terrain</a></li>
+            <li><a href="/game-mechanics/">Game Mechanics</a></li>
+        </ul>
+
+        <h2>Concepts</h2>
+        <ul>
+            <li><a href="/concepts/achievements/">Achievements</a></li>
+            <li><a href="/concepts/modifiers/">Modifiers</a></li>
+            <li><a href="/concepts/objectives/">Objectives</a></li>
+            <li><a href="/concepts/randomness/">Randomness</a></li>
+        </ul>
+
+        <h2>API</h2>
+        <ul>
+            <li><a href="/api/">Overview</a></li>
+            <li><a href="/api/ref/">Reference</a></li>
+            <li><a href="/api/event/">Events</a></li>
+        </ul>
+
+        <h2>Scripts</h2>
+        <ul>
+            <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/animation/">Animation</a></li>
+            <li><a href="/scripts/aura/">Aura</a></li>
+            <li><a href="/scripts/behavior/">Behavior</a></li>
+            <li><a href="/scripts/glue/">Glue</a></li>
+            <li><a href="/scripts/spell/">Spell</a></li>
+            <li><a href="/scripts/particleeffect/">Particle Effect</a></li>
+        </ul>
+
+        <h2>Examples</h2>
+        <ul>
+            <li><a href="/examples/achievement/">Achievement</a></li>
+        </ul>
+    </div>
+
+    <div id="docs">
+        <h1>Animations</h1>
+
+<p>Animations breathe life into models used by world objects. Here we focus on the
+mechanics of the internal animation system. Additionally we will discuss two
+important API methods that allow designers to steer the animation of
+characters.</p>
+
+<h2>Definitions</h2>
+
+<ul>
+<li><p><em>Animation label</em>: Label describing a single animation, e.g. "walk", or
+"death".</p></li>
+<li><p><em>Animation deck</em>: A bundle of animations of the same position type, e.g.
+the "air" animation deck contains all animations a model can perform while
+flying.
+A set of standardized animations is defined for every deck (see below).</p></li>
+<li><p><em>Deck transition</em>: Transmissions between animation decks can be animated
+(optional). This is can for example be used to let a unit land or takeoff,
+when switching between the "air" and "ground" animation decks.</p></li>
+</ul><h2>The Animation State Machine</h2>
+
+<p><img src="../../assets/anim_decks.png" alt="Animation Decks"></p>
+
+<p>The animation decks are organized in a FSM (see Figure above). A transition
+from one to another deck triggers the animation of labeled transition arrows.</p>
+
+<p><strong>Currently, the transition states are hardcoded</strong> (but will be exposed to the
+new editor, once it is available):</p>
+
+<ul>
+<li>ground (Default),</li>
+<li>air (Airborne units).</li>
+</ul><p>The initial animation deck state can be set in the <code>worldObjectTemplate</code>:</p>
+
+<pre><code>aUnit = (worldObjectTemplate "Unit") {
+    name: "UnitA", behavior: "A", scale: 0.3,
+    movementSpeed: 1, positionType: "air"
+</code></pre>
+
+<p>}</p>
+
+<h3>unitSetAnimationDeck(unit, newDeckName) :: undefined</h3>
+
+<p>Sets the new animation deck for unit. Currently, we support the <code>ground</code> and
+<code>air</code> animation decks. On transition from <code>ground</code> to <code>air</code> the animation with
+the label <code>fly_start</code> (if defined) is played with a 2 seconds duration. In the
+opposite direction we play the animation with the label <code>fly_end</code>.</p>
+
+<h2>Naming Conventions</h2>
+
+<p>Animation labels can be defined in the editor for each model. To be able to
+use the animation machinery the labels have to conform to the following
+guidlines.
+The animation label is composed of the animation deck name its action
+description (<code>animationDeckName_actionName</code>):</p>
+
+<ul>
+<li>idle (standing/Floating)</li>
+<li>walk (slowly moving)</li>
+<li>run  (fast moving)</li>
+<li>hit  (unit is hit by damage)</li>
+<li>death</li>
+<li>attack (default fallback melee attack)
+
+<ul>
+<li>slash (single slash, sword)</li>
+<li>stab  (quick stab, dagger)</li>
+<li>slam  (big overhead swing, two-handed hammer)</li>
+</ul>
+</li>
+<li>cast (default fallback magical spell cast)
+
+<ul>
+<li>directed (caster facing the target, fireball)</li>
+<li>remote   (caster not facing the target, rain of fire)</li>
+<li>centered (aoe spell centered around caster, group heal)</li>
+<li>summon   (summoning/reviving a creature/minion)</li>
+</ul>
+</li>
+<li>block (hiding behind a shield/weapon)</li>
+</ul><p>To define the idle flying animation the label <code>air_idle</code> has to be used in the
+editor.</p>
+
+<p>TODO: How do we differentiate instant cast animations from normal cast
+animations?</p>
+
+<h2>Playing custom animations</h2>
+
+<p>Some models may offer additional animations, e.g. the dragon model has an
+animation for sleeping. Designers might want to use these animations to script
+"mini-cutscenes". Using the following API method, the animation state of a
+unit can be changed:</p>
+
+<h3>unitSetAnimation(unit, name, duration) :: undefined</h3>
+
+<p>The custom animation is played for the specified duration, or looped until
+overridden if the duration is zero.</p>
+
+<p>Note that the labels of custom animations do not follow any naming convention
+and do not belong to a specific animation deck.</p>
+    </div>
+</div>
+</div>
+
+<footer>
+<div class='container'>
+    <span>© rmx inc.</span>
+    <ul>
+        <li>Powered by:</li>
+        <li><a href="http://nanoc.stoneship.org/">nanoc</a><span>|</span></li>
+        <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+    </ul>
+</div>
+</footer>
+
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2db2f1844d52060d000035');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    var $window = $(window),
+    $stickyEl = $('#sidebar');
+
+    var elTop = $stickyEl.offset().top;
+
+    $window.scroll(function() {
+        var windowTop = $window.scrollTop();
+        if ($window.height() < $stickyEl.height())
+            return;
+
+        if (windowTop > elTop || elTop - windowTop < 10) {
+            $stickyEl.css({ position: 'fixed', top: '10px' })
+        } else {
+            $stickyEl.removeAttr('style')
+        }
+    });
+</script>
+
+</body>
+</html>

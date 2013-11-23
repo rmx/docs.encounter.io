@@ -53,6 +53,7 @@
         <h2>Scripts</h2>
         <ul>
             <li><a href="/scripts/achievement/">Achievement</a></li>
+            <li><a href="/scripts/animation/">Animation</a></li>
             <li><a href="/scripts/aura/">Aura</a></li>
             <li><a href="/scripts/behavior/">Behavior</a></li>
             <li><a href="/scripts/glue/">Glue</a></li>
@@ -111,9 +112,7 @@ positions in particle effects the definition distinguishes two position types:</
 <ul>
 <li>absolute (coordinates or unit), and</li>
 <li>relative (unit or labeled vertex).</li>
-</ul>
-
-<p>For example in the effect definition above we have,</p>
+</ul><p>For example in the effect definition above we have,</p>
 
 <pre><code>"SphereCapZone": ["relunit label", 0.5, 0.6, 80]
 </code></pre>
@@ -197,9 +196,7 @@ modifiers are applied. The following zones are currently available:</p>
 <li><code>PointZone</code></li>
 <li><code>ParallelogramZone</code></li>
 <li><code>SphereCapZone</code></li>
-</ul>
-
-<p>In the following we briefly introduce the arguments of these zones.</p>
+</ul><p>In the following we briefly introduce the arguments of these zones.</p>
 
 <h3>"CubeZone": [position, x, y, z]</h3>
 
@@ -253,9 +250,7 @@ side endpoints.</p>
 <code>offset</code>: offset from <code>source</code>/<code>target</code> position if used</li>
 <li>
 <code>zone</code>:</li>
-</ul>
-
-<p>The following arguments can be overridden by the settings object: <code>duration</code>,
+</ul><p>The following arguments can be overridden by the settings object: <code>duration</code>,
 <code>delay</code>, <code>counter</code>, <code>npart</code>, <code>color</code>, <code>size</code>, <code>offset</code>.</p>
 
 <h2>Initializers</h2>
@@ -269,9 +264,7 @@ side endpoints.</p>
 <code>"velocity": [zone]</code>: set velocity according to position in zone</li>
 <li>
 <code>"radialvelocity": [outerRadius, innerRadius]</code>: helper to accelerate outward</li>
-</ul>
-
-<h2>Modifiers</h2>
+</ul><h2>Modifiers</h2>
 
 <p>Some modifiers use TWEEN.js for interpolation. The default in all cases is
 <code>linear.none</code>. See
@@ -304,9 +297,7 @@ size to target particle size using easing (default: linear),</li>
 <li>
 <code>"randomdrift": [drift x, drift y, drift z]</code>: random drift by max. delta
 drift.</li>
-</ul>
-
-<p><strong>Note</strong>: If the particle effect has no <code>move</code> modifier the particles will not
+</ul><p><strong>Note</strong>: If the particle effect has no <code>move</code> modifier the particles will not
 move and the <code>age</code> is necessary for modifiers relying on the particle age.</p>
 
 <h2>Deathzone</h2>
@@ -319,7 +310,6 @@ through an opening or window.</p>
 
 <pre><code>"deathzone": { "CubeZone": [-50, -50, 0, 100, 100, -5] }
 </code></pre>
-
     </div>
 </div>
 </div>
