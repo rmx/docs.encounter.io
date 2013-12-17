@@ -85,6 +85,20 @@ editor.
 TODO: How do we differentiate instant cast animations from normal cast
 animations?
 
+The `animation` spell information field can be used to specify a custom
+animation for a spell. The following example assigns the `slam` animation to
+the slam spell:
+
+    class Slam
+        target:    { type: "WorldObject", range: { min: 0, max: 5 } }
+        castTime:  { base: 0, minimum: 0 }
+        spellType: "harmful"
+
+        # determines animation to play
+        animation: "slam"
+
+        # rest of spell definition..
+
 
 ## Playing custom animations
 
