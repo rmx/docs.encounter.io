@@ -1,14 +1,15 @@
-\chapter{Attack}
+\section{Attack}
+\label{sec:attack}
 
-\subsection*{Attack process}
+\subsection{Attack process}
 
 \begin{enumerate}
 	\item  Determine the attack outcome (miss, hit, crit, ...)
 	\item  Apply the damage to the target
-	\item  Process any procs on the caster and the target(on hit, on being hit, ...)
+	\item  Process any applicable reactions
 \end{enumerate}
 
-\subsection*{Properties of a damaging attack}
+\subsection{Properties of a damaging attack}
 
 \begin{tabular}{p{4cm} l l}
 \toprule
@@ -22,18 +23,24 @@ Crit damage & Base damage bonus of critical strikes & 200\% \\
 \bottomrule
 \end{tabular}
 
-\subsection*{Common properties of effects that modify a damaging attack}
+\subsection{Reactions}
 
-\begin{tabular}{p{4cm} p{10cm}}
+%Two versions for each of the following reactions (incoming and outgoing).
+
+
+\begin{tabular}{p{6cm} p{8cm}}
 \toprule
-Property & Description \\
+Event & Description \\
 \midrule
-Damage type & The type of damage. The effect only modifies an attack if their types are equal. \\
-Stacking category & If there are multiple effects with the same stacking category, only the best effect applies. \\
+Attack hit & ... \\
+Attack crit & ... \\
+Attack missed & ... \\
+Attack prevented by immunity & ... \\
+Attack dealt damage & ... \\
 \bottomrule
 \end{tabular}
 
-\section{Attack outcome}
+\subsection{Attack outcome}
 
 \begin{tikzpicture}[
 	->,
@@ -79,7 +86,7 @@ Stacking category & If there are multiple effects with the same stacking categor
 ; 
 \end{tikzpicture}
 
-\section{Applying direct damage}
+\subsection{Applying direct damage}
 
 \begin{tikzpicture}[
 	>=stealth',

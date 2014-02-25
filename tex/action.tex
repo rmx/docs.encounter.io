@@ -1,17 +1,32 @@
-\chapter{Spell}
+\chapter{Action}
 
-\subsection*{Spell casting process}
+\subsection{Action execution process}
 
 \begin{enumerate}
-	\item  Check spell preconditions (range, visibility, target type, ...)
-	\item  Consume power for attempting the spell (mana, rage, ...)
-	\item  Transition to spell casting state
-	\item  Consume power for performing the spell (mana, rage, ...)
-	\item  Execute all effects associated with the spell
-	\item  Process any procs on the caster (on cast, ...)
+	\item At the start:
+	\begin{itemize}
+		\item Check preconditions (range, visibility, ...)
+		\item Consume resources (mana, rage, ...)
+		\item Execute effects
+		\item Process reactions (on cast start, on cast failed, ...)
+    	\end{itemize}
+	\item  At each tick:
+	\begin{itemize}
+		\item Check preconditions
+		\item Consume resources
+		\item Execute effects
+		\item Process reactions 
+    	\end{itemize}
+	\item At the end:
+	\begin{itemize}
+		\item Check preconditions
+		\item Consume resources
+		\item Execute effects
+		\item Process reactions 
+    	\end{itemize}
 \end{enumerate}
 
-\subsection*{Properties of a spell}
+\subsection{Properties of an action}
 
 \begin{tabular}{p{4cm} l l}
 \toprule
@@ -23,3 +38,7 @@ Power type & ... & ... \\
 Cooldown & ... & ... \\
 \bottomrule
 \end{tabular}
+
+\subsection{Resource cost}
+
+Whenever the executing unit does not have enough resources, the action is immediately aborted.
