@@ -1,10 +1,10 @@
 \section{Attack}
 \label{sec:attack}
 
-\subsection{Attack process}
+\subsection{Executing an attack}
 
 \begin{enumerate}
-	\item  Determine the attack outcome (miss, hit, crit, ...)
+	\item  Determine the attack outcome (immune, miss, hit, crit)
 	\item  Apply the damage to the target
 	\item  Process any applicable reactions
 \end{enumerate}
@@ -17,13 +17,10 @@ Property & Description & Default \\
 \midrule
 Damage amount & Distribution of the base damage & required \\
 Damage type & The type of damage, e.g., \emph{fire} & \emph{physical} \\
-Hit chance & Hit chance bonus & 0\% \\
-Crit chance & Crit chance bonus & 0\% \\
-Crit damage & Base damage bonus of critical strikes & 200\% \\
 \bottomrule
 \end{tabular}
 
-\subsection{Reactions}
+\subsection{Events}
 
 %Two versions for each of the following reactions (incoming and outgoing).
 
@@ -40,7 +37,7 @@ Attack dealt damage & ... \\
 \bottomrule
 \end{tabular}
 
-\subsection{Attack outcome}
+\subsection{Modifiers: attack outcome}
 
 \begin{tikzpicture}[
 	->,
@@ -86,7 +83,7 @@ Attack dealt damage & ... \\
 ; 
 \end{tikzpicture}
 
-\subsection{Applying direct damage}
+\subsection{Modifiers: damage}
 
 \begin{tikzpicture}[
 	>=stealth',
