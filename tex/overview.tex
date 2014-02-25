@@ -1,0 +1,87 @@
+\chapter{Overview}
+
+\section{Basic concepts}
+
+\begin{description}
+	\item [Effect] A small, atomic game event.\\
+		\textit{E.g., a unit attacking another unit.}
+	\item [Modifier] Modifies unit attributes or game events.\\
+		\textit{E.g., reduce all incoming damage, or make a unit move faster.}
+	\item [Reaction] Tiggers effects after a given game event.\\
+		\textit{E.g., Heal a unit after it has taken damage.}
+	\item [Condition] A condition that can be attached to an effect, a modifier or a reaction. The parent is then only active if the condition is met.\\
+		\textit{E.g., make a damage reduction modifier only apply for fire damage, or make a spell only stun the target if it is a demon.}
+	\item [Action] An action performed by a unit. Can contain modifiers, reactions, effects.\\
+		\textit{E.g., a spell with an increased crit chance (modifier) that deals damage to the target (effect), and restores half the cost if the spell missed (reaction).}
+	\item [Aura] A named compound state attached to a unit. Can contain modifiers, reactions, effects.\\
+		\textit{E.g., an aura that periodically deals frost damage (periodic effect), slows the movement speed (modifier), and freezes the target after it takes additional damage (reaction).}
+\end{description}
+
+
+\begin{tikzpicture}[
+    ->,
+    >=stealth',
+    concept/.style={draw, rounded corners, thick, rectangle split, rectangle split parts=2, text ragged, text width=8em, minimum height=2cm},
+    node distance=1.5cm
+    ]
+
+    % Action
+    \node[concept] (ACTION) 
+    {
+        \textbf{Action}
+        \nodepart{second}
+    };
+
+    % Reaction
+    \node[concept,below right=of ACTION] (REACTION) 
+    {
+        \textbf{Reaction}
+        \nodepart{second}
+    };
+
+    % Aura
+    \node[concept,above right=of REACTION] (AURA) 
+    {
+        \textbf{Aura}
+        \nodepart{second}
+    };
+
+    % Effect
+    \node[concept,below=of REACTION] (EFFECT) 
+    {
+        \textbf{Effect}
+        \nodepart{second}
+    };
+
+    % Modifier
+    \node[concept,below=of EFFECT] (MODIFIER) 
+    {
+        \textbf{Modifier}
+        \nodepart{second}
+    };
+    
+    % Condition
+    \node[concept,right=of EFFECT] (CONDITION) 
+    {
+        \textbf{Condition}
+        \nodepart{second}
+    };
+
+    % draw the paths
+    \draw (ACTION) edge (REACTION);
+    \draw (AURA) edge (REACTION);
+    
+    \draw (ACTION) edge[bend right=20] (EFFECT);
+    \draw (REACTION) edge (EFFECT);
+    \draw (AURA) edge[bend left=20] (EFFECT);
+
+    \draw (ACTION) edge[bend right=20] (MODIFIER);
+    \draw (EFFECT) edge (MODIFIER);
+    \draw (AURA) edge[bend left=20] (MODIFIER);
+
+    \draw (EFFECT) edge (CONDITION);
+    \draw (REACTION) edge (CONDITION);
+    \draw (MODIFIER) edge (CONDITION);
+
+\end{tikzpicture}
+
